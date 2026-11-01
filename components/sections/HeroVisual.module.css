@@ -57,9 +57,10 @@
 
 /* Portrait */
 
+/* Offset left of centre so the floating panels overlap the frame's edges, not the face. */
 .portrait {
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 50%;
   width: 50%;
   margin: 0;
@@ -424,7 +425,7 @@
   }
 
   .portrait {
-    left: 36%;
+    left: 33%;
     width: 56%;
     translate: -50% -54%;
   }
