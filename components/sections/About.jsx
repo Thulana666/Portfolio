@@ -93,18 +93,6 @@ export default function About({ site, about, photo }) {
                   </ul>
                 </div>
               )}
-              {about.languages?.length > 0 && (
-                <div className={styles.interestGroup}>
-                  <h3 className={styles.interestTitle}>Languages</h3>
-                  <ul className="tag-list">
-                    {about.languages.map((language) => (
-                      <li key={language} className="tag">
-                        {language}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </Reveal>
           </div>
         </div>

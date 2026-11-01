@@ -77,8 +77,7 @@ export const navLinks = [
 /**
  * About section. `focus` items come from your stated interests.
  * `personalInterests` is the small "Beyond the screen" area: each item has a
- * `label` and an optional `detail`. It stays hidden while empty, as does
- * `languages`.
+ * `label` and an optional `detail`. It stays hidden while empty.
  */
 export const about = {
   statement:
@@ -110,5 +109,4 @@ export const about = {
       detail: 'Zonal Championship 2nd runner-up (2016) and 1st runner-up (2017); selected to junior nationals (2018)',
     },
   ],
-  languages: ['Sinhala', 'English', 'Tamil'],
 };
