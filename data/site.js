@@ -76,21 +76,22 @@ export const navLinks = [
 
 /**
  * About section. `focus` items come from your stated interests.
- * `personalInterests` is the small "Beyond the screen" area — add your own
- * hobbies here (e.g. { label: 'Photography' }). It stays hidden while empty.
+ * `personalInterests` is the small "Beyond the screen" area: each item has a
+ * `label` and an optional `detail`. It stays hidden while empty, as does
+ * `languages`.
  */
 export const about = {
   statement:
     'I am most interested in the point where raw data becomes a decision — and in building the intelligent systems that get it there.',
   paragraphs: [
     'I am an Information Technology undergraduate at the Sri Lanka Institute of Information Technology (SLIIT), focusing on Data Analytics, Artificial Intelligence and Machine Learning.',
-    'During my internship at Bodyline (Pvt) Ltd, part of MAS Holdings, I worked on business intelligence and enterprise solutions — from Power BI analytics to workflow applications and process automation. That experience shaped how I think about data: it is only valuable when it helps people solve practical business problems.',
+    'During my data analytics internship at Bodyline (Pvt) Ltd, part of MAS Holdings, I worked on business intelligence and enterprise solutions — from Power BI analytics to workflow applications and process automation. That experience shaped how I think about data: it is only valuable when it helps people solve practical business problems.',
     'My final-year research explores how an AI-driven digital twin could make pharmaceutical supply chains more resilient.',
   ],
   facts: [
     { label: 'Studying', value: 'BSc (Hons) in Information Technology', detail: 'SLIIT · Undergraduate' },
     { label: 'Focus', value: 'Data Analytics, AI & Machine Learning', detail: 'Supported by software engineering' },
-    { label: 'Industry', value: 'Internship at Bodyline (Pvt) Ltd', detail: 'MAS Holdings' },
+    { label: 'Industry', value: 'Data Analytics Intern', detail: 'MAS Bodyline · Sep 2025 – Mar 2026' },
   ],
   focus: [
     'Business Intelligence',
@@ -99,5 +100,15 @@ export const about = {
     'Intelligent Automation',
     'Pharmaceutical Supply-Chain Intelligence',
   ],
-  personalInterests: [],
+  personalInterests: [
+    {
+      label: 'Community service',
+      detail: 'Committee Member, Club Service Avenue, Rotaract Club of Colombo Port City (2025 – Present)',
+    },
+    {
+      label: 'Badminton',
+      detail: 'Zonal Championship 2nd runner-up (2016) and 1st runner-up (2017); selected to junior nationals (2018)',
+    },
+  ],
+  languages: ['Sinhala', 'English', 'Tamil'],
 };

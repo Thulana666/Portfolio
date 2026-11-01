@@ -14,12 +14,12 @@ export const experience = [
       height: 256,
       alt: 'Bodyline, a joint venture with MAS, MAST Industries and Triumph',
     },
-    role: 'Intern',
+    role: 'Intern – Data Analytics',
     type: 'Internship',
-    period: '', // e.g. 'Jan 2025 – Jul 2025'
+    period: 'Sep 2025 – Mar 2026',
     location: '', // e.g. 'Sri Lanka'
     summary:
-      'Contributed to business intelligence, enterprise application and process-automation work across three initiatives.',
+      'Worked across business intelligence, enterprise application development and process automation, from SAP-integrated Power BI analytics to approval workflows and package tracking.',
     confidentiality:
       'Descriptions are generalised. No company data, internal dashboards or proprietary information are shown on this site.',
     contributions: [
@@ -30,13 +30,13 @@ export const experience = [
         domain: 'data-ai',
         featured: true,
         description:
-          'An analytical dashboard focused on material availability monitoring and operational insights.',
+          'A Power BI dashboard that tracks material availability across categories and customers, delivering availability KPIs for supply-chain decision-making.',
         highlights: [
-          'Data transformation',
-          'Data modelling',
-          'Analytical measures',
+          'Integrated SAP and operational data',
+          'Data transformation with Power Query',
+          'Optimised data models',
+          'DAX measures for availability KPIs',
           'Dashboard development',
-          'Integration of operational and SAP-related data',
         ],
         technologies: ['Power BI', 'Power Query', 'DAX', 'SQL'],
         projectSlug: 'material-availability-dashboard',
@@ -46,12 +46,13 @@ export const experience = [
         title: 'Digital Pulse',
         category: 'Enterprise Software Development',
         domain: 'software',
-        description: 'A project submission and approval workflow application.',
+        description:
+          'An internal web application for submitting and managing digital improvement projects through multi-level approvals.',
         highlights: [
-          'Application feature development',
-          'Workflow implementation',
-          'Database integration',
-          'Project management functionality',
+          'Multi-level approvals: Line Manager, Finance, Digital Team and ExCo',
+          'Secure login and email-based approval access',
+          'Project tracking dashboards',
+          'File attachments',
         ],
         technologies: ['React', 'Node.js', 'Express', 'SQL Server', 'Azure SQL'],
         projectSlug: 'digital-pulse',
@@ -62,8 +63,12 @@ export const experience = [
         category: 'Business Process Automation',
         domain: 'automation',
         description:
-          'An inbound package tracking solution with automated notifications and escalation workflows.',
-        highlights: ['Package tracking app', 'Automated notifications', 'Escalation workflows'],
+          'A Power Apps solution for tracking inbound courier packages, built to improve package visibility and reduce clearance delays.',
+        highlights: [
+          'Integrated SharePoint waybill data',
+          'Automated notifications',
+          'Automated escalation workflows',
+        ],
         technologies: ['Power Apps', 'Power Automate', 'SharePoint'],
         projectSlug: 'dhl-package-tracker',
       },

@@ -94,7 +94,7 @@ export const projects = [
     status: null,
     context: 'Internship · Bodyline (Pvt) Ltd — MAS Holdings',
     summary:
-      'An enterprise analytics dashboard focused on monitoring material availability and transforming operational data into useful insights.',
+      'A Power BI dashboard that tracks material availability across categories and customers, integrating SAP data to deliver availability KPIs for supply-chain decision-making.',
     tech: ['Power BI', 'Power Query', 'DAX', 'SQL'],
     visual: 'dashboard',
     cover: null,
@@ -103,27 +103,27 @@ export const projects = [
       confidentiality:
         'Built for an internal business context. The visuals on this site are illustrative — no company data, internal dashboards or proprietary information are shown.',
       overview:
-        'An analytics dashboard developed during my internship to monitor material availability and turn operational data into insights that support day-to-day decisions.',
+        'A Power BI dashboard developed during my data analytics internship at MAS Bodyline to track material availability across categories and customers, delivering accurate availability KPIs for supply-chain decision-making.',
       problem:
-        'Monitoring material availability means bringing together data from several operational and SAP-related sources. Without a consolidated analytical view, it takes more effort to understand availability and act on it.',
+        'Monitoring material availability means bringing together data from SAP and other operational sources. Without a consolidated analytical view, it takes more effort to understand availability and act on it.',
       objectives: [
-        'Consolidate operational and SAP-related data into a single analytical model.',
-        'Provide a clear, interactive view of material availability.',
-        'Create reusable analytical measures for consistent reporting.',
+        'Integrate SAP and operational data into a single analytical model.',
+        'Track material availability across categories and customers.',
+        'Deliver accurate availability KPIs to support supply-chain decisions.',
       ],
-      dataSources: ['Operational data', 'SAP-related data'],
+      dataSources: ['SAP data', 'Operational data'],
       methodology: [
         { title: 'Transform', text: 'Cleaned and shaped source data with Power Query.' },
-        { title: 'Model', text: 'Built a data model relating operational and SAP-related tables.' },
-        { title: 'Measure', text: 'Wrote analytical measures in DAX.' },
-        { title: 'Visualise', text: 'Developed the Power BI dashboard for availability monitoring.' },
+        { title: 'Model', text: 'Built optimised data models relating SAP and operational tables.' },
+        { title: 'Measure', text: 'Wrote DAX measures for the availability KPIs.' },
+        { title: 'Visualise', text: 'Developed the dashboard to track availability across categories and customers.' },
       ],
       implementation: [
-        'Data transformation',
-        'Data modelling',
-        'Analytical measures',
+        'Integration of SAP and operational data',
+        'Data transformation with Power Query',
+        'Optimised data models',
+        'DAX measures for availability KPIs',
         'Dashboard development',
-        'Integration of operational and SAP-related data',
       ],
       results: [],
       challenges: [],
@@ -192,7 +192,8 @@ export const projects = [
     domain: 'software',
     status: null,
     context: 'Internship · Bodyline (Pvt) Ltd — MAS Holdings',
-    summary: 'A project submission and approval workflow solution.',
+    summary:
+      'An internal web application for submitting and managing digital improvement projects through multi-level approvals.',
     tech: ['React', 'Node.js', 'Express', 'SQL Server', 'Azure SQL'],
     visual: 'workflow',
     cover: null,
@@ -201,21 +202,23 @@ export const projects = [
       confidentiality:
         'Built for an internal business context. The visuals on this site are illustrative — no company data or proprietary information are shown.',
       overview:
-        'A workflow application for submitting projects and moving them through an approval process, developed as part of my internship.',
+        'An internal web application developed during my internship at MAS Bodyline for submitting and managing digital improvement projects, with approvals at several levels of the organisation.',
       problem:
-        'Project submissions need a clear path from submission to approval, with their status visible to everyone involved.',
+        'Digital improvement projects need sign-off from several stakeholders. The application aims to improve project visibility and streamline that approval process.',
       objectives: [
-        'Provide a structured way to submit projects.',
-        'Implement an approval workflow.',
-        'Support project management activities in one application.',
+        'Give teams one place to submit digital improvement projects.',
+        'Route each project through Line Manager, Finance, Digital Team and ExCo approval.',
+        'Make project status visible through tracking dashboards.',
       ],
       dataSources: [],
       methodology: [],
       implementation: [
-        'Application feature development',
-        'Workflow implementation',
+        'Multi-level approval workflow: Line Manager, Finance, Digital Team and ExCo',
+        'Secure login',
+        'Email-based approval access',
+        'Project tracking dashboards',
+        'File attachments',
         'Database integration with SQL Server / Azure SQL',
-        'Project management functionality',
       ],
       results: [],
       challenges: [],
@@ -267,7 +270,7 @@ export const projects = [
     status: null,
     context: 'Internship · Bodyline (Pvt) Ltd — MAS Holdings',
     summary:
-      'An inbound package tracking solution with automated notification and escalation workflows.',
+      'A Power Apps solution for tracking inbound courier packages, using SharePoint waybill data with automated notification and escalation workflows.',
     tech: ['Power Apps', 'Power Automate', 'SharePoint'],
     visual: 'automation',
     cover: null,
@@ -276,19 +279,19 @@ export const projects = [
       confidentiality:
         'Built for an internal business context. The visuals on this site are illustrative — no company data or proprietary information are shown.',
       overview:
-        'A low-code solution for tracking inbound packages, with automated notifications and escalation workflows.',
+        'A low-code solution developed during my internship at MAS Bodyline to track inbound courier packages, built to improve package visibility and reduce clearance delays.',
       problem:
-        'Inbound packages need to be logged and followed up so recipients know when something has arrived and nothing is left waiting.',
+        'Inbound courier packages need to be tracked and followed up so they are cleared without delay and nothing is left waiting.',
       objectives: [
-        'Track inbound packages in one place.',
-        'Notify people automatically.',
-        'Escalate items that need attention.',
+        'Track inbound courier packages in one place.',
+        'Use waybill data to improve package visibility.',
+        'Escalate packages automatically to reduce clearance delays.',
       ],
-      dataSources: [],
+      dataSources: ['SharePoint waybill data'],
       methodology: [],
       implementation: [
         'Power Apps interface for package tracking',
-        'SharePoint as the data store',
+        'Integration of SharePoint waybill data',
         'Power Automate flows for notifications and escalations',
       ],
       results: [],

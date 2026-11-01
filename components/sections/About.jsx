@@ -80,10 +80,26 @@ export default function About({ site, about, photo }) {
               {about.personalInterests.length > 0 && (
                 <div className={styles.interestGroup}>
                   <h3 className={styles.interestTitle}>Beyond the screen</h3>
+                  <ul className={styles.beyond}>
+                    {about.personalInterests.map((item) => {
+                      const label = item.label ?? item;
+                      return (
+                        <li key={label}>
+                          <span className={styles.beyondLabel}>{label}</span>
+                          {item.detail && <span className={styles.beyondDetail}>{item.detail}</span>}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+              {about.languages?.length > 0 && (
+                <div className={styles.interestGroup}>
+                  <h3 className={styles.interestTitle}>Languages</h3>
                   <ul className="tag-list">
-                    {about.personalInterests.map((item) => (
-                      <li key={item.label ?? item} className="tag">
-                        {item.label ?? item}
+                    {about.languages.map((language) => (
+                      <li key={language} className="tag">
+                        {language}
                       </li>
                     ))}
                   </ul>

@@ -1,7 +1,8 @@
 .grid {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* auto-fit: a short list stretches to fill the row instead of leaving gaps */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 18px;
 }
 

@@ -9,11 +9,9 @@ function DetailList({ title, items }) {
   return (
     <div className={styles.detail}>
       <h4 className={styles.detailTitle}>{title}</h4>
-      <ul className="tag-list">
+      <ul className={styles.detailList}>
         {items.map((item) => (
-          <li key={item} className="tag">
-            {item}
-          </li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </div>

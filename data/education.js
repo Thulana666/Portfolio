@@ -13,13 +13,18 @@ export const education = [
     monogram: 'SLIIT',
     qualification: 'BSc (Hons) in Information Technology',
     status: 'Undergraduate',
-    location: 'Sri Lanka',
+    location: 'Malabe, Sri Lanka',
     logo: '/logos/sliit.png',
     cover: { src: '/education/sliit-campus.webp', position: '62% 62%' },
-    period: '', // e.g. '2022 – Present'
+    period: 'May 2023 – Present',
     coursework: [], // e.g. ['Data Science', 'Machine Learning', 'Database Systems']
-    achievements: [],
-    activities: [],
+    achievements: ['Certificate of Appreciation, Rotaract Club of SLIIT (Rotary Year 2023–24)'],
+    activities: [
+      'Student Ambassador (2024 – Present)',
+      'Batch Representative (2023 – Present)',
+      'Committee Member, Club Service Avenue, Rotaract Club of SLIIT (2023 – 2025)',
+      'Chorister & Crew Member, SLIIT Choir (2023 – Present)',
+    ],
   },
   {
     institution: "S. Thomas' College, Mount Lavinia",
@@ -30,8 +35,11 @@ export const education = [
     location: 'Mount Lavinia, Sri Lanka',
     logo: '/logos/stc.png',
     cover: { src: '/education/stc-campus.webp', position: '55% 45%' },
-    period: '', // e.g. '2008 – 2021'
-    examinations: [], // e.g. ['G.C.E. Advanced Level — Stream', 'G.C.E. Ordinary Level']
+    period: '2014 – 2022',
+    examinations: [
+      'G.C.E. Advanced Level, Biological Science stream (2022)',
+      'G.C.E. Ordinary Level (2019)',
+    ],
     achievements: [],
     activities: [],
   },
