@@ -36,9 +36,9 @@ export default function Education({ items }) {
                 </span>
 
                 <div className={styles.head}>
-                  <div className={styles.emblem}>
+                  <div className={styles.emblem} data-logo={entry.logo ? '' : undefined}>
                     {entry.logo ? (
-                      <Image src={entry.logo} alt={`${entry.shortName} logo`} width={56} height={56} className={styles.logo} />
+                      <Image src={entry.logo} alt={`${entry.institution} crest`} fill sizes="80px" className={styles.logo} />
                     ) : (
                       <span aria-hidden="true">{entry.monogram}</span>
                     )}

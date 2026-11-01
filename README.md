@@ -75,7 +75,7 @@ Each entry in `data/projects.js` drives a card on the home page and a case study
 
 ### Education and certifications
 
-Fill in `period`, `coursework`, `examinations`, `achievements` and `activities` in `data/education.js`. Empty fields stay hidden. Add an institution `logo` only if you have permission to use it; otherwise the monogram is used.
+Fill in `period`, `coursework`, `examinations`, `achievements` and `activities` in `data/education.js`. Empty fields stay hidden. Institution and company logos live in `public/logos/` and are set by the `logo` field in `data/education.js` and `data/experience.js`. They're shown on a white badge so they read in both themes. Set `logo` to `null` to fall back to a monogram or icon.
 
 The certifications section is hidden until `data/certifications.js` has at least one entry with a `name`. The file contains a commented example entry.
 

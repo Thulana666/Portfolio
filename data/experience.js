@@ -7,6 +7,13 @@ export const experience = [
   {
     company: 'Bodyline (Pvt) Ltd',
     group: 'MAS Holdings',
+    // Optional logo in /public, shown on a white badge. Set to null to show an icon.
+    logo: {
+      src: '/logos/bodyline.png',
+      width: 949,
+      height: 256,
+      alt: 'Bodyline, a joint venture with MAS, MAST Industries and Triumph',
+    },
     role: 'Intern',
     type: 'Internship',
     period: '', // e.g. 'Jan 2025 – Jul 2025'

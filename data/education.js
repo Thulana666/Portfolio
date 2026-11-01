@@ -1,8 +1,7 @@
 /**
  * Education timeline. Every optional field is hidden while empty, so fill in
- * only what you want to show. `logo` is an optional image path in /public —
- * use official logos only when you have permission; otherwise the
- * `monogram` is shown.
+ * only what you want to show. `logo` is an optional image path in /public
+ * (shown on a white badge); set it to null to show the `monogram` instead.
  */
 
 export const education = [
@@ -13,7 +12,7 @@ export const education = [
     qualification: 'BSc (Hons) in Information Technology',
     status: 'Undergraduate',
     location: 'Sri Lanka',
-    logo: null,
+    logo: '/logos/sliit.png',
     period: '', // e.g. '2022 – Present'
     coursework: [], // e.g. ['Data Science', 'Machine Learning', 'Database Systems']
     achievements: [],
@@ -26,7 +25,7 @@ export const education = [
     qualification: 'School Education',
     status: '',
     location: 'Mount Lavinia, Sri Lanka',
-    logo: null,
+    logo: '/logos/stc.png',
     period: '', // e.g. '2008 – 2021'
     examinations: [], // e.g. ['G.C.E. Advanced Level — Stream', 'G.C.E. Ordinary Level']
     achievements: [],

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Building2, Check, ShieldCheck } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
@@ -22,9 +23,22 @@ export default function Experience({ items }) {
           <div key={job.company} className={styles.job}>
             <Reveal className={styles.aside}>
               <div className={styles.companyCard}>
-                <span className={styles.companyIcon}>
-                  <Building2 size={20} aria-hidden="true" />
-                </span>
+                {job.logo ? (
+                  <span className={styles.logoPlate}>
+                    <Image
+                      src={job.logo.src}
+                      alt={job.logo.alt}
+                      width={job.logo.width}
+                      height={job.logo.height}
+                      sizes="280px"
+                      className={styles.logo}
+                    />
+                  </span>
+                ) : (
+                  <span className={styles.companyIcon}>
+                    <Building2 size={20} aria-hidden="true" />
+                  </span>
+                )}
                 <span className="badge badge-neutral">{job.type}</span>
                 <h3 className={styles.company}>{job.company}</h3>
                 <p className={styles.group}>{job.group}</p>

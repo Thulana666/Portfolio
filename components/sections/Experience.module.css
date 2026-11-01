@@ -30,6 +30,26 @@
   box-shadow: inset 0 1px 0 var(--glass-inner);
 }
 
+/* Company wordmark on a white badge so the black lettering reads in dark mode. */
+.logoPlate {
+  display: block;
+  width: min(100%, 280px);
+  margin-bottom: 8px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 12px 28px -16px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .company {
   margin-top: 8px;
   font-size: clamp(1.75rem, 3vw, 2.5rem);
