@@ -1,0 +1,203 @@
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.counter {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-3);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
+  transition:
+    border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+:global([data-theme='light']) .field input,
+:global([data-theme='light']) .field textarea {
+  background: #fff;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-3);
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-color: var(--text-3);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent-ink);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.field input[aria-invalid],
+.field textarea[aria-invalid] {
+  border-color: #ff7a7a;
+}
+
+.field input[aria-invalid]:focus,
+.field textarea[aria-invalid]:focus {
+  box-shadow: 0 0 0 4px rgba(255, 122, 122, 0.15);
+}
+
+.field input:disabled,
+.field textarea:disabled {
+  opacity: 0.6;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: #ff8f8f;
+}
+
+:global([data-theme='light']) .error {
+  color: #c62828;
+}
+
+:global([data-theme='light']) .field input[aria-invalid],
+:global([data-theme='light']) .field textarea[aria-invalid] {
+  border-color: #d32f2f;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+  margin-top: 4px;
+}
+
+.actions button:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+
+.note {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.live:empty {
+  display: none;
+}
+
+.status {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.status svg {
+  flex: none;
+  margin-top: 2px;
+}
+
+.status[data-state='success'] {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--text);
+}
+
+.status[data-state='success'] svg {
+  color: var(--accent-ink);
+}
+
+.status[data-state='error'] {
+  background: rgba(255, 122, 122, 0.08);
+  border: 1px solid rgba(255, 122, 122, 0.35);
+}
+
+.status[data-state='error'] svg {
+  color: #ff8f8f;
+}
+
+.status[data-state='mailto'] {
+  background: var(--blue-soft);
+  border: 1px solid var(--line-strong);
+}
+
+.status[data-state='mailto'] svg {
+  color: var(--blue);
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}

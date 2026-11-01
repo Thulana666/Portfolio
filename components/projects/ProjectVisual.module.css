@@ -1,0 +1,309 @@
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  /* Lock the track to the frame so the SVG scales down to fit instead of overflowing */
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+  padding: 6%;
+  background:
+    radial-gradient(80% 70% at 85% 10%, var(--tone-soft), transparent 70%),
+    radial-gradient(70% 60% at 0% 100%, var(--blue-soft), transparent 70%),
+    linear-gradient(180deg, var(--bg-2), var(--bg));
+  overflow: hidden;
+}
+
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  fill: var(--text-3);
+}
+
+/* Shared shapes */
+
+.tile {
+  fill: var(--glass);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.skeleton {
+  fill: var(--line-strong);
+}
+
+.skeletonStrong {
+  fill: var(--text-3);
+  opacity: 0.55;
+}
+
+.skeletonHot {
+  fill: var(--accent);
+}
+
+.skeletonViolet {
+  fill: var(--violet);
+}
+
+.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.bar {
+  fill: var(--blue);
+  opacity: 0.45;
+}
+
+.barHot {
+  fill: var(--accent);
+}
+
+.donutTrack {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 8;
+}
+
+.donut {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 68 100;
+  transform: rotate(-90deg);
+  transform-origin: 322px 123px;
+}
+
+.cell {
+  fill: var(--glass-strong);
+  stroke: var(--line);
+}
+
+.cellHot {
+  fill: var(--accent);
+  opacity: 0.85;
+}
+
+.cellViolet {
+  fill: var(--violet);
+  opacity: 0.7;
+}
+
+/* Twin */
+
+.twinWire {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 6;
+  animation: dash 2.4s linear infinite;
+}
+
+.twinVirtual {
+  fill: var(--bg);
+  stroke: var(--violet);
+  stroke-width: 1.5;
+}
+
+.twinSync {
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+  opacity: 0.7;
+}
+
+.twinPath {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2;
+}
+
+.twinPulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 26 300;
+  animation: pulse-travel 3.6s var(--ease-in-out) infinite;
+}
+
+.twinNode {
+  fill: var(--bg-3);
+  stroke: var(--line-strong);
+}
+
+.twinNodeHot {
+  fill: var(--bg-3);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.twinBadge rect {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+}
+
+.twinBadge text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  fill: var(--accent-ink);
+}
+
+/* ML */
+
+.axis {
+  stroke: var(--line-strong);
+}
+
+.boundary {
+  fill: none;
+  stroke: var(--text-2);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+
+.boundaryZone {
+  fill: none;
+  stroke: var(--violet-soft);
+  stroke-width: 36;
+  stroke-linecap: round;
+}
+
+.dotA {
+  fill: var(--accent);
+  opacity: 0.85;
+}
+
+.dotB {
+  fill: var(--violet);
+  opacity: 0.85;
+}
+
+.matrix {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Workflow */
+
+.flow {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 2;
+  stroke-dasharray: 5 6;
+  animation: dash 1.8s linear infinite;
+}
+
+.step {
+  fill: var(--glass-strong);
+  stroke: var(--blue);
+  stroke-width: 1.5;
+}
+
+.stepHot {
+  fill: var(--accent);
+}
+
+.check {
+  fill: none;
+  stroke: var(--accent-contrast);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Platform */
+
+.checkDone {
+  fill: var(--accent);
+}
+
+.checkOpen {
+  fill: none;
+  stroke: var(--text-3);
+  stroke-width: 1.5;
+}
+
+.bubble {
+  fill: var(--glass-strong);
+  stroke: var(--line);
+}
+
+.bubbleMine {
+  fill: var(--blue);
+  opacity: 0.6;
+}
+
+/* Automation */
+
+.stepBox {
+  fill: var(--glass-strong);
+  stroke: var(--line-strong);
+}
+
+.stepBoxHot {
+  fill: var(--violet-soft);
+  stroke: var(--violet);
+  stroke-width: 1.5;
+}
+
+.glyph {
+  fill: none;
+  stroke: var(--text-2);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.glyphHot {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.escalate {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+  animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@keyframes pulse-travel {
+  0% {
+    stroke-dashoffset: 26;
+  }
+  100% {
+    stroke-dashoffset: -310;
+  }
+}

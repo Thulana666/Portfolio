@@ -1,0 +1,163 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-ink);
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-size: clamp(2.4rem, 5.4vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.lead {
+  max-width: 520px;
+  font-size: 1.0625rem;
+  color: var(--text-2);
+}
+
+.channels {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.channel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px 14px 14px;
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 0 var(--glass-inner);
+  transition:
+    translate 0.4s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.channel:hover {
+  translate: 4px 0;
+  border-color: var(--glass-border);
+}
+
+.channelIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--glass-strong);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.channelText {
+  display: grid;
+  min-width: 0;
+}
+
+.channelLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.channelValue {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channelArrow {
+  color: var(--text-3);
+  transition:
+    color 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.channel:hover .channelArrow {
+  color: var(--accent-ink);
+  transform: translate(2px, -2px);
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 6px;
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-2);
+  font-size: 0.9375rem;
+}
+
+.location svg {
+  color: var(--accent-ink);
+}
+
+.formCard {
+  padding: clamp(22px, 3.4vw, 40px);
+  border-radius: var(--radius-xl);
+  /* Dense input area: keep it on a more opaque surface for readability */
+  background: var(--glass-solid);
+}
+
+.formHead {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 26px;
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+.formSub {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+}
+
+.inlineLink {
+  color: var(--text);
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.inlineLink:hover {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

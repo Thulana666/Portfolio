@@ -1,0 +1,101 @@
+/**
+ * Skills grouped by priority. No proficiency percentages by design.
+ * `icon` is a Lucide icon name mapped in components/sections/SkillsExplorer.jsx.
+ */
+
+export const skillGroups = [
+  {
+    id: 'analytics',
+    title: 'Data Analytics',
+    icon: 'chart',
+    tier: 'Primary',
+    tone: 'lime',
+    blurb: 'Turning raw data into clear, decision-ready insight.',
+    skills: [
+      { name: 'Power BI', note: 'Dashboards & reporting' },
+      { name: 'Power Query', note: 'Data transformation' },
+      { name: 'DAX', note: 'Analytical measures' },
+      { name: 'Pandas', note: 'Data wrangling' },
+      { name: 'NumPy', note: 'Numerical computing' },
+      { name: 'SQL', note: 'Querying & joins' },
+      { name: 'Matplotlib', note: 'Visualisation' },
+      { name: 'Seaborn', note: 'Statistical plots' },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'Artificial Intelligence',
+    icon: 'brain',
+    tier: 'Primary',
+    tone: 'violet',
+    blurb: 'Exploring models that learn from data and predict outcomes.',
+    skills: [
+      { name: 'Python', note: 'Core language for ML' },
+      { name: 'Scikit-learn', note: 'Modelling toolkit' },
+      { name: 'Machine Learning', note: 'Supervised learning' },
+      { name: 'Predictive Analytics', note: 'Forecasting outcomes' },
+      { name: 'Data Preprocessing', note: 'Feature preparation' },
+    ],
+  },
+  {
+    id: 'software',
+    title: 'Software Development',
+    icon: 'code',
+    tier: 'Supporting',
+    tone: 'blue',
+    blurb: 'Building the applications that put data and intelligence to work.',
+    skills: [
+      { name: 'JavaScript', note: 'Language' },
+      { name: 'Java', note: 'Language' },
+      { name: 'HTML', note: 'Markup' },
+      { name: 'CSS', note: 'Styling' },
+      { name: 'React', note: 'UI library' },
+      { name: 'Next.js', note: 'React framework' },
+      { name: 'Node.js', note: 'Runtime' },
+      { name: 'Express', note: 'API framework' },
+    ],
+  },
+  {
+    id: 'databases',
+    title: 'Databases',
+    icon: 'database',
+    tier: 'Supporting',
+    tone: 'blue',
+    blurb: 'Relational and document stores.',
+    skills: [
+      { name: 'SQL Server', note: 'Relational' },
+      { name: 'MySQL', note: 'Relational' },
+      { name: 'MongoDB', note: 'Document' },
+    ],
+  },
+  {
+    id: 'automation',
+    title: 'Automation & Cloud',
+    icon: 'workflow',
+    tier: 'Supporting',
+    tone: 'blue',
+    blurb: 'Low-code automation and cloud platforms.',
+    skills: [
+      { name: 'Power Apps', note: 'Low-code apps' },
+      { name: 'Power Automate', note: 'Workflow automation' },
+      { name: 'SharePoint', note: 'Collaboration & lists' },
+      { name: 'AWS', note: 'Cloud platform' },
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Tools',
+    icon: 'wrench',
+    tier: 'Toolkit',
+    tone: 'neutral',
+    blurb: 'Everyday tools for building, analysing and designing.',
+    skills: [
+      { name: 'Git', note: 'Version control' },
+      { name: 'GitHub', note: 'Collaboration' },
+      { name: 'VS Code', note: 'Editor' },
+      { name: 'Jupyter Notebook', note: 'Analysis' },
+      { name: 'Figma', note: 'Design' },
+      { name: 'Canva', note: 'Design' },
+    ],
+  },
+];

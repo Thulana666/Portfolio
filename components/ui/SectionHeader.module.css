@@ -1,0 +1,38 @@
+.header {
+  display: grid;
+  gap: 20px;
+  max-width: 820px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.header[data-align='center'] {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-ink);
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+
+.intro {
+  max-width: 620px;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  color: var(--text-2);
+}
