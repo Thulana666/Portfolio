@@ -12,6 +12,9 @@ export function generateStaticParams() {
 
 const accents = { 'data-ai': '#B9F36A', software: '#8B9CFF', automation: '#A78BFA' };
 
+const [brandFirst, ...rest] = site.brand.toUpperCase().split(' ');
+const brandRest = rest.join(' ');
+
 export default async function ProjectOpenGraphImage({ params }) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -34,8 +37,9 @@ export default async function ProjectOpenGraphImage({ params }) {
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 2, display: 'flex' }}>
-            THULANA<span style={{ color: '#B9F36A' }}>.DEV</span>
+          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 2, display: 'flex', gap: 10 }}>
+            <span>{brandFirst}</span>
+            <span style={{ color: '#B9F36A' }}>{brandRest}</span>
           </div>
           {project?.status === 'in-progress' && (
             <div
@@ -64,7 +68,7 @@ export default async function ProjectOpenGraphImage({ params }) {
         </div>
 
         <div style={{ fontSize: 26, color: '#A1A9B5', display: 'flex' }}>
-          Case study · {site.name}
+          Case study · {site.role}
         </div>
       </div>
     ),

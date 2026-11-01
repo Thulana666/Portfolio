@@ -4,7 +4,9 @@
  */
 
 export const site = {
-  brand: 'THULANA.DEV',
+  // Logo text (nav, footer, social images) and page-title suffix.
+  // The first word is shown in the main colour, the rest in the accent colour.
+  brand: 'Thulana De Silva',
   name: 'Thulana De Silva',
   firstName: 'Thulana',
   initials: 'TD',

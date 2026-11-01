@@ -47,15 +47,15 @@ export default function Footer({ site, links }) {
         </div>
 
         {/* SVG text with textLength always fits the container width exactly. */}
-        <svg className={styles.wordmark} viewBox="0 0 1000 132" aria-hidden="true" focusable="false">
+        <svg className={styles.wordmark} viewBox="0 0 1000 92" aria-hidden="true" focusable="false">
           <defs>
             <linearGradient id="footer-wordmark" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor="var(--text)" stopOpacity="0.09" />
               <stop offset="100%" stopColor="var(--text)" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <text x="0" y="124" textLength="1000" lengthAdjust="spacingAndGlyphs">
-            {site.brand}
+          <text x="0" y="86" textLength="1000" lengthAdjust="spacingAndGlyphs">
+            {site.brand.toUpperCase()}
           </text>
         </svg>
 

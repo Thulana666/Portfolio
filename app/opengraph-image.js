@@ -5,6 +5,9 @@ export const alt = `${site.name} — ${site.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
+const [brandFirst, ...rest] = site.brand.toUpperCase().split(' ');
+const brandRest = rest.join(' ');
+
 export default function OpenGraphImage() {
   return new ImageResponse(
     (
@@ -25,8 +28,9 @@ export default function OpenGraphImage() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{ width: 40, height: 40, borderRadius: 12, background: '#B9F36A' }} />
-          <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: 2, display: 'flex' }}>
-            THULANA<span style={{ color: '#B9F36A' }}>.DEV</span>
+          <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: 2, display: 'flex', gap: 10 }}>
+            <span>{brandFirst}</span>
+            <span style={{ color: '#B9F36A' }}>{brandRest}</span>
           </div>
         </div>
 
@@ -35,9 +39,7 @@ export default function OpenGraphImage() {
             <span>Turning Data Into</span>
             <span style={{ color: '#B9F36A' }}>Intelligence.</span>
           </div>
-          <div style={{ fontSize: 30, color: '#A1A9B5', display: 'flex' }}>
-            {site.name} · {site.role}
-          </div>
+          <div style={{ fontSize: 30, color: '#A1A9B5', display: 'flex' }}>{site.role}</div>
         </div>
 
         <div style={{ display: 'flex', gap: 14, fontSize: 22, color: '#A1A9B5' }}>

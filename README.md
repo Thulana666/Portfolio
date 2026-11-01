@@ -1,4 +1,4 @@
-# THULANA.DEV
+# Thulana De Silva — Portfolio
 
 Personal portfolio of **Thulana De Silva**: Data Analytics & AI first, with software engineering as a supporting strength.
 
@@ -43,7 +43,7 @@ Everything visitors read lives in `data/`. You shouldn't need to touch component
 
 | What | File |
 | --- | --- |
-| Name, headline, introduction, location, availability label, email, socials, SEO text | `data/site.js` (`site`) |
+| Name, logo text (`brand`), headline, introduction, location, availability label, email, socials, SEO text | `data/site.js` (`site`) |
 | About section copy, facts, "Currently exploring", personal interests | `data/site.js` (`about`) |
 | Areas of expertise (priority order) | `data/expertise.js` |
 | Internship / experience | `data/experience.js` |

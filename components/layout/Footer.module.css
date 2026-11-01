@@ -60,7 +60,7 @@
 .wordmark text {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 150px;
+  font-size: 104px;
   fill: url(#footer-wordmark);
   stroke: var(--line-strong);
   stroke-width: 1;

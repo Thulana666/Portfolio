@@ -87,6 +87,7 @@ export default function Navbar({ brand, links, cvHref }) {
 
   const current = isHome ? active : pathname.startsWith('/projects') ? 'projects' : null;
   const close = () => setOpen(false);
+  const [brandFirst, ...brandRest] = brand.split(' ');
 
   return (
     <header className={styles.header} data-scrolled={scrolled || undefined}>
@@ -94,8 +95,8 @@ export default function Navbar({ brand, links, cvHref }) {
         <Link href="/#home" className={styles.brand} aria-label={`${brand} — home`} onClick={close}>
           <span className={styles.mark} aria-hidden="true" />
           <span className={styles.brandText}>
-            {brand.replace('.DEV', '')}
-            <span className={styles.brandTld}>.DEV</span>
+            {brandFirst}
+            {brandRest.length > 0 && <span className={styles.brandRest}> {brandRest.join(' ')}</span>}
           </span>
         </Link>
 

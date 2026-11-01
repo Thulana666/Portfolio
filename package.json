@@ -2,7 +2,7 @@
   "name": "thulana-dev",
   "version": "1.0.0",
   "private": true,
-  "description": "THULANA.DEV — personal portfolio of Thulana De Silva (Data Analytics & AI).",
+  "description": "Personal portfolio of Thulana De Silva (Data Analytics & AI).",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

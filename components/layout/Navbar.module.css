@@ -53,6 +53,8 @@
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .mark {
@@ -75,7 +77,7 @@
   clip-path: polygon(0 0, 100% 0, 100% 35%, 62% 35%, 62% 100%, 38% 100%, 38% 35%, 0 35%);
 }
 
-.brandTld {
+.brandRest {
   color: var(--accent-ink);
 }
 
@@ -206,7 +208,7 @@
   --btn-h: 50px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .links {
     display: none;
   }
@@ -236,7 +238,20 @@
   }
 }
 
-@media (min-width: 1081px) {
+@media (max-width: 400px) {
+  .brand {
+    gap: 8px;
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  .mark {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 1181px) {
   .scrim,
   .sheet {
     display: none;
