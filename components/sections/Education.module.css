@@ -64,6 +64,58 @@
   background-image: radial-gradient(90% 70% at 100% 0%, var(--accent-soft), transparent 60%);
 }
 
+/* Campus photo banner: fills the top of the card and fades into the glass,
+   so the text below always sits on a readable surface. */
+.cover {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -2;
+  height: 230px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--scrim-rgb) / 0.2) 0%,
+    rgb(var(--scrim-rgb) / 0.05) 35%,
+    rgb(var(--scrim-rgb) / 0.55) 100%
+  );
+}
+
+.coverImage {
+  object-fit: cover;
+  filter: saturate(0.92) brightness(0.88);
+  transition: transform 1.2s var(--ease);
+}
+
+:global([data-theme='light']) .coverImage {
+  filter: none;
+}
+
+.card[data-cover]:hover .coverImage {
+  transform: scale(1.04);
+}
+
+/* Push the text below the photo; the crest and status badge sit on it. */
+.card[data-cover] .head {
+  margin-bottom: 92px;
+}
+
+.card[data-cover] .head :global(.badge) {
+  background: var(--glass-solid-strong);
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.5);
+}
+
+.card[data-cover][data-current] {
+  background-image: none;
+}
+
 .watermark {
   position: absolute;
   right: -10px;

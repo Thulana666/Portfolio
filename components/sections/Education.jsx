@@ -30,7 +30,24 @@ export default function Education({ items }) {
           {items.map((entry, index) => (
             <Reveal as="li" key={entry.institution} className={styles.item} delay={index * 0.08}>
               <span className={styles.node} aria-hidden="true" data-current={index === 0 || undefined} />
-              <article className={`glass ${styles.card}`} data-glow data-current={index === 0 || undefined}>
+              <article
+                className={`glass ${styles.card}`}
+                data-glow
+                data-current={index === 0 || undefined}
+                data-cover={entry.cover ? '' : undefined}
+              >
+                {entry.cover && (
+                  <div className={styles.cover} aria-hidden="true">
+                    <Image
+                      src={entry.cover.src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 760px) 100vw, 620px"
+                      className={styles.coverImage}
+                      style={{ objectPosition: entry.cover.position }}
+                    />
+                  </div>
+                )}
                 <span className={styles.watermark} aria-hidden="true">
                   {entry.monogram}
                 </span>

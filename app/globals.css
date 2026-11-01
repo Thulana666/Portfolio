@@ -56,6 +56,9 @@
   --ambient-lime: rgba(185, 243, 106, 0.07);
   --grid-line: rgba(255, 255, 255, 0.028);
 
+  /* Base colour (as RGB channels) for tinting photos behind content */
+  --scrim-rgb: 8 11 16;
+
   /* Type */
   --font-display: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
   --font-body: var(--font-inter), 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -122,6 +125,8 @@
   --ambient-violet: rgba(167, 139, 250, 0.16);
   --ambient-lime: rgba(150, 220, 70, 0.16);
   --grid-line: rgba(15, 23, 42, 0.035);
+
+  --scrim-rgb: 243 245 248;
 }
 
 /* --------------------------------------------------------------------------
