@@ -25,7 +25,9 @@ export default function About({ site, about, photo }) {
                   alt={`Portrait of ${site.name}`}
                   fill
                   quality={90}
-                  sizes="(max-width: 760px) 90vw, (max-width: 1080px) 40vw, 380px"
+                  // The frame is taller than the photo, so object-fit: cover renders it
+                  // wider than the frame; size for that, not the frame width.
+                  sizes="(max-width: 760px) 92vw, (max-width: 1080px) 48vw, 600px"
                   className={styles.photo}
                 />
               ) : (

@@ -29,10 +29,11 @@ export const site = {
   // Short availability label shown in the hero. Set to '' to hide it.
   availability: 'Open to Data Analytics & AI opportunities',
 
-  // Profile photo inside /public. Leave the file out (or set to null) and a
-  // monogram is shown instead. Recommended: 4:5 portrait, at least 800x1000px.
+  // Profile photo for the About section, inside /public. Leave the file out
+  // (or set to null) and a monogram is shown instead. Recommended: portrait,
+  // at least 1000px wide, head to hips.
   // Use a new file name when replacing it so cached copies aren't reused.
-  photo: '/images/thulana-de-silva-portrait.jpg',
+  photo: '/images/thulana-de-silva-portrait-hq.jpg',
 
   // Cut-out portrait (transparent PNG) for the hero, standing in front of the
   // name. If the file is missing the hero shows the name on its own.
