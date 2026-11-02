@@ -31,9 +31,9 @@ export const site = {
 
   // Profile photo for the About section, inside /public. Leave the file out
   // (or set to null) and a monogram is shown instead. Recommended: portrait,
-  // at least 1000px wide, head to hips.
+  // at least 1000px wide, head to waist.
   // Use a new file name when replacing it so cached copies aren't reused.
-  photo: '/images/thulana-de-silva-portrait-hq.jpg',
+  photo: '/images/thulana-de-silva-half-body.jpg',
 
   // Cut-out portrait (transparent PNG) for the hero, standing in front of the
   // name. If the file is missing the hero shows the name on its own.
