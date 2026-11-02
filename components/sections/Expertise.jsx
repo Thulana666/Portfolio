@@ -23,13 +23,13 @@ export default function Expertise({ items }) {
                 key={item.title}
                 as="article"
                 delay={index * 0.08}
-                className={`glass ${styles.card} ${primary ? styles.primary : styles.secondary}`}
+                className={`${primary ? `glass glass-thick ${styles.primary}` : `surface ${styles.secondary}`} ${styles.card}`}
                 data-tone={item.tone}
-                data-glow
+                data-glow={primary ? '' : undefined}
               >
                 <div className={styles.head}>
                   <span className={styles.priority}>{item.priority}</span>
-                  <span className={styles.level}>{item.level}</span>
+                  <span className={`label ${styles.level}`}>{item.level}</span>
                 </div>
 
                 <div className={styles.visual}>

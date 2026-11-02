@@ -3,11 +3,12 @@ import About from '@/components/sections/About';
 import Expertise from '@/components/sections/Expertise';
 import Experience from '@/components/sections/Experience';
 import Projects from '@/components/sections/Projects';
-import SkillsExplorer from '@/components/sections/SkillsExplorer';
+import SkillsBento from '@/components/sections/SkillsBento';
 import Education from '@/components/sections/Education';
 import Certifications from '@/components/sections/Certifications';
 import Contact from '@/components/sections/Contact';
 import SectionHeader from '@/components/ui/SectionHeader';
+import Ticker from '@/components/ui/Ticker';
 import { about, site } from '@/data/site';
 import { expertise } from '@/data/expertise';
 import { experience } from '@/data/experience';
@@ -26,6 +27,7 @@ export default function HomePage() {
   return (
     <>
       <Hero site={site} photo={photo} cvHref={cvHref} />
+      <Ticker items={['Data Analytics', 'Artificial Intelligence', 'Machine Learning', ...about.focus]} />
       <About site={site} about={about} photo={photo} />
       <Expertise items={expertise} />
       <Experience items={experience} />
@@ -49,10 +51,10 @@ export default function HomePage() {
             index="05"
             eyebrow="Technical skills"
             title="A toolkit organised by priority."
-            intro="Grouped by what I focus on most. No percentage bars, just the tools I use and what I use them for."
+            intro="Sized by what I focus on most. No percentage bars, just the tools I use and what I use them for."
             id="skills-title"
           />
-          <SkillsExplorer groups={skillGroups} />
+          <SkillsBento groups={skillGroups} />
         </div>
       </section>
 

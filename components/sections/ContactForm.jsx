@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AlertCircle, CheckCircle2, Loader2, Mail, Send } from 'lucide-react';
+import Magnetic from '@/components/ui/Magnetic';
 import { contactLimits, validateContact } from '@/lib/contact';
 import styles from './ContactForm.module.css';
 
@@ -155,6 +156,7 @@ export default function ContactForm({ formEnabled, email }) {
       </div>
 
       <div className={styles.actions}>
+        <Magnetic strength={0.2} className={styles.submitWrap}>
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? (
             <>
@@ -170,6 +172,7 @@ export default function ContactForm({ formEnabled, email }) {
             </>
           )}
         </button>
+        </Magnetic>
         <p id="contact-form-note" className={styles.note}>
           {formEnabled
             ? 'Your details are only used to reply to you.'

@@ -4,7 +4,15 @@
   aspect-ratio: 1 / 1.04;
   max-height: 660px;
   min-height: 460px;
+  perspective: 1400px;
   --glass-blur: 16px;
+}
+
+/* Panel stack; tilts slightly towards the cursor (see HeroVisual.jsx) */
+.tilt {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
 }
 
 .canvas {

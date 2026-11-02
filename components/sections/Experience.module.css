@@ -106,7 +106,43 @@
   color: var(--accent-ink);
 }
 
+.years {
+  margin: 0 0 18px;
+  font-size: clamp(2.6rem, 4.6vw, 4rem);
+  -webkit-text-stroke: 1px var(--accent-line);
+  white-space: nowrap;
+}
+
 /* Timeline */
+
+.timelineWrap {
+  position: relative;
+}
+
+/* Scroll-linked fill over the static rail (ScrollLine) */
+.timelineFill {
+  position: absolute;
+  left: 16.5px;
+  top: 18px;
+  bottom: 18px;
+  z-index: 1;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--blue) 60%, var(--violet));
+  transform-origin: top center;
+  pointer-events: none;
+}
+
+.focusLabel {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+
+.featured .marker {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
 
 .timeline {
   position: relative;
@@ -276,7 +312,8 @@
     padding-left: 0;
   }
 
-  .timeline::before {
+  .timeline::before,
+  .timelineFill {
     display: none;
   }
 

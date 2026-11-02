@@ -198,6 +198,9 @@ export default function HeroVisual({ photo, name, initials, location }) {
   const layer1 = { x: useTransform(sx, (v) => v * 10), y: useTransform(sy, (v) => v * 10) };
   const layer2 = { x: useTransform(sx, (v) => v * 22), y: useTransform(sy, (v) => v * 22) };
   const layer3 = { x: useTransform(sx, (v) => v * 34), y: useTransform(sy, (v) => v * 34) };
+  // The whole panel stack tilts a few degrees towards the cursor for spatial depth.
+  const tiltX = useTransform(sy, (v) => v * -7);
+  const tiltY = useTransform(sx, (v) => v * 7);
 
   const onPointerMove = (event) => {
     const rect = wrapRef.current.getBoundingClientRect();
@@ -222,8 +225,9 @@ export default function HeroVisual({ photo, name, initials, location }) {
       <div className={styles.orbit} aria-hidden="true" />
       <div className={`${styles.orbit} ${styles.orbitInner}`} aria-hidden="true" />
 
+      <motion.div className={styles.tilt} style={{ rotateX: tiltX, rotateY: tiltY }}>
       {/* Portrait */}
-      <motion.figure className={`glass ${styles.portrait}`} style={layer1}>
+      <motion.figure className={`glass glass-thick ${styles.portrait}`} style={layer1}>
         <div className={styles.portraitMedia}>
           {photo ? (
             <Image
@@ -248,7 +252,7 @@ export default function HeroVisual({ photo, name, initials, location }) {
       </motion.figure>
 
       {/* Forecast panel */}
-      <motion.div className={`glass ${styles.panel} ${styles.panelChart}`} style={layer3} aria-hidden="true">
+      <motion.div className={`glass glass-thick ${styles.panel} ${styles.panelChart}`} style={layer3} aria-hidden="true">
         <div className={styles.panelHead}>
           <span className={styles.panelLabel}>Signal → Insight</span>
           <span className={styles.panelChip}>Forecast</span>
@@ -340,6 +344,7 @@ export default function HeroVisual({ photo, name, initials, location }) {
       <motion.div className={`glass ${styles.chip}`} style={layer2} aria-hidden="true">
         <MapPin size={13} />
         {location}
+      </motion.div>
       </motion.div>
     </div>
   );

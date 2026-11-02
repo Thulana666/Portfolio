@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { GitHubIcon } from '@/components/ui/BrandIcons';
 import ProjectCover from '@/components/projects/ProjectCover';
@@ -38,15 +38,38 @@ function StatusBadge({ status }) {
   return null;
 }
 
-function FeaturedCard({ project }) {
+const pad = (n) => String(n).padStart(2, '0');
+
+function Peek() {
   return (
-    <article className={`glass ${styles.featured}`} data-tone={toneByDomain[project.domain]} data-glow>
+    <span className={`glass glass-thin ${styles.peek}`} aria-hidden="true">
+      View case study <ArrowUpRight size={15} />
+    </span>
+  );
+}
+
+function FeaturedCard({ project, number, tilt }) {
+  return (
+    <article className={`glass glass-thick ${styles.featured}`} data-tone={toneByDomain[project.domain]} data-glow {...tilt}>
       <div className={styles.featuredMedia}>
         <ProjectCover project={project} sizes="(max-width: 980px) 100vw, 640px" className={styles.cover} />
+        <span className={`numeral ${styles.featuredNumber}`} aria-hidden="true">
+          {pad(number)}
+        </span>
+        <Peek />
+        {project.status === 'in-progress' && (
+          <div className={`glass glass-thick ${styles.statusPanel}`} aria-hidden="true">
+            <span className={styles.statusKey}>Status</span>
+            <span className={styles.statusValue}>
+              <span className={styles.statusPulse} /> In progress
+            </span>
+            <span className={styles.statusNote}>Final-year research</span>
+          </div>
+        )}
       </div>
       <div className={styles.featuredBody}>
         <div className={styles.metaRow}>
-          <span className={styles.category}>{project.category}</span>
+          <span className={`label ${styles.categoryLabel}`}>{project.category}</span>
           <StatusBadge status={project.status} />
         </div>
         <h3 className={styles.featuredTitle}>
@@ -77,17 +100,23 @@ function FeaturedCard({ project }) {
   );
 }
 
-function ProjectCard({ project, span }) {
+function ProjectCard({ project, span, number, tilt }) {
   const visibleTags = project.tech.slice(0, 4);
   const extra = project.tech.length - visibleTags.length;
   return (
-    <article className={`glass ${styles.card}`} data-tone={toneByDomain[project.domain]} data-span={span} data-glow>
+    <article className={`glass ${styles.card}`} data-tone={toneByDomain[project.domain]} data-span={span} data-glow {...tilt}>
       <div className={styles.media}>
         <ProjectCover project={project} sizes="(max-width: 760px) 100vw, 50vw" className={styles.cover} />
-        <span className={styles.mediaLabel}>{project.category}</span>
+        <span className={`label ${styles.mediaLabel}`}>{project.category}</span>
+        <Peek />
       </div>
       <div className={styles.body}>
-        <p className={styles.context}>{project.context}</p>
+        <div className={styles.bodyTop}>
+          <p className={styles.context}>{project.context}</p>
+          <span className={`numeral ${styles.number}`} aria-hidden="true">
+            {pad(number)}
+          </span>
+        </div>
         <h3 className={styles.title}>
           <Link href={`/projects/${project.slug}`} className={styles.stretched}>
             {project.title}
@@ -113,8 +142,33 @@ function ProjectCard({ project, span }) {
   );
 }
 
+// Gentle 3D tilt towards the cursor (mouse only). Values go into CSS
+// variables so moving the pointer never re-renders React.
+function makeTilt(strength, reduceMotion) {
+  if (reduceMotion) return {};
+  return {
+    onPointerMove(event) {
+      if (event.pointerType !== 'mouse') return;
+      const el = event.currentTarget;
+      const rect = el.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      el.style.setProperty('--ry', `${(x * strength).toFixed(2)}deg`);
+      el.style.setProperty('--rx', `${(-y * strength).toFixed(2)}deg`);
+    },
+    onPointerLeave(event) {
+      event.currentTarget.style.setProperty('--rx', '0deg');
+      event.currentTarget.style.setProperty('--ry', '0deg');
+    },
+  };
+}
+
 export default function Projects({ projects, filters }) {
   const [filter, setFilter] = useState('all');
+  const reduceMotion = useReducedMotion();
+  const cardTilt = makeTilt(7, reduceMotion);
+  const featuredTilt = makeTilt(2.5, reduceMotion);
+  const numberOf = (project) => projects.indexOf(project) + 1;
 
   const visible = filter === 'all' ? projects : projects.filter((p) => p.domain === filter);
   const featured = visible.find((p) => p.featured);
@@ -175,7 +229,7 @@ export default function Projects({ projects, filters }) {
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              <FeaturedCard project={featured} />
+              <FeaturedCard project={featured} number={numberOf(featured)} tilt={featuredTilt} />
             </motion.li>
           )}
           {rest.map((project, index) => (
@@ -189,7 +243,7 @@ export default function Projects({ projects, filters }) {
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
-              <ProjectCard project={project} span={spanFor(index)} />
+              <ProjectCard project={project} span={spanFor(index)} number={numberOf(project)} tilt={cardTilt} />
             </motion.li>
           ))}
         </AnimatePresence>

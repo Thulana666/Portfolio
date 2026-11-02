@@ -104,7 +104,11 @@ The form validates input in the browser and again on the server, and never shows
 ## Design system notes
 
 - **Tokens**: colours, radii, spacing and fonts are CSS variables at the top of `app/globals.css`. The light theme overrides them under `[data-theme='light']`.
-- **Liquid Glass**: `.glass` is the shared translucent surface. Browsers without `backdrop-filter` get a solid fallback. Add `data-glow` to any `.glass` element to get the pointer-following light reflection.
+- **Liquid Glass**: `.glass` is the shared translucent surface. Browsers without `backdrop-filter` get a solid fallback. Add `.glass-thin` (chrome, chips) or `.glass-thick` (feature panels: stronger blur, top lighting, refracted rim) to change the intensity. Dense content uses the solid `.surface` instead. Add `data-glow` to any `.glass` element to get the pointer-following light reflection.
+- **Editorial accents**: `.label` is the hard-edged mono label and `.numeral` the oversized outline numbers used by section headers, Experience, Projects and Skills.
+- **Brand intro**: `components/layout/Intro.jsx` plays once per browser session, is driven entirely by CSS, and is skipped for reduced-motion users.
+- **Micro-interactions**: `components/ui/Magnetic.jsx` (magnetic buttons), `ScrollLine.jsx` (scroll-linked timeline), `Ticker.jsx` (focus-area band), the navbar reading-progress line, project-card tilt, and `app/template.js` (page transitions between routes).
+- **In-page links**: `components/layout/HashScroll.jsx` handles `/#section` links: it scrolls smoothly, moves focus to the section, and waits for the mobile menu to release its scroll lock.
 - **Theme**: dark by default. The toggle remembers the visitor's choice and uses a circular View Transition where supported.
 - **Motion**: Framer Motion with `reducedMotion="user"`. Visitors with reduced motion get fades instead of movement, the hero network renders as a still frame, and CSS animations are disabled.
 - **Fonts**: Space Grotesk (headings) and Inter (body), self-hosted via `next/font`.

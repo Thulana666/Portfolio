@@ -18,6 +18,14 @@ function DetailList({ title, items }) {
   );
 }
 
+// "May 2023 – Present" → "2023—Now"; "2014 – 2022" → "2014—2022"; no period → monogram.
+function yearsLabel(entry) {
+  const years = entry.period?.match(/\d{4}/g) ?? [];
+  if (years.length === 0) return entry.monogram;
+  const end = /present/i.test(entry.period) ? 'Now' : years[years.length - 1];
+  return end === years[0] ? years[0] : `${years[0]}—${end}`;
+}
+
 export default function Education({ items }) {
   return (
     <section id="education" className="section" aria-labelledby="education-title">
@@ -47,7 +55,7 @@ export default function Education({ items }) {
                   </div>
                 )}
                 <span className={styles.watermark} aria-hidden="true">
-                  {entry.monogram}
+                  {yearsLabel(entry)}
                 </span>
 
                 <div className={styles.head}>

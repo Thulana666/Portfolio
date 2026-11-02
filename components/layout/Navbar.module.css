@@ -42,6 +42,19 @@
   }
 }
 
+/* Reading progress along the bottom edge of the floating bar */
+.progress {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--accent));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
 /* Brand */
 
 .brand {

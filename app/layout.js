@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import AmbientBackground from '@/components/layout/AmbientBackground';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import Intro from '@/components/layout/Intro';
 import Providers from '@/components/layout/Providers';
 import { navLinks, site } from '@/data/site';
 import { publicAsset } from '@/lib/assets';
@@ -47,8 +48,9 @@ export const viewport = {
   colorScheme: 'dark light',
 };
 
-// Runs before paint so the saved theme never flashes.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();`;
+// Runs before paint: applies the saved theme (no flash) and marks whether the
+// brand intro has already played this session.
+const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');d.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(e){d.dataset.theme='dark';}try{if(sessionStorage.getItem('intro')){d.dataset.intro='seen';}else{sessionStorage.setItem('intro','1');d.dataset.intro='play';}}catch(e){d.dataset.intro='seen';}})();`;
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -88,6 +90,7 @@ export default function RootLayout({ children }) {
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <Intro brand={site.brand} tagline="Data · AI · Innovation" />
         <AmbientBackground />
         <Providers>
           <Navbar brand={site.brand} links={navLinks} cvHref={cvHref} />

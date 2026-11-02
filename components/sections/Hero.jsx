@@ -1,19 +1,15 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowDownToLine, ArrowRight, MapPin, MessageSquareText } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '@/components/ui/BrandIcons';
+import Magnetic from '@/components/ui/Magnetic';
 import HeroVisual from './HeroVisual';
 import styles from './Hero.module.css';
 
 const ease = [0.22, 1, 0.36, 1];
-
-const rise = (delay) => ({
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, ease, delay },
-});
 
 const titleLines = [
   { text: 'Turning', accent: false },
@@ -27,9 +23,45 @@ const pillars = [
   { label: 'Innovation', tone: 'blue' },
 ];
 
+// The brand intro is timed by CSS from first paint and starts fading ~1.05s
+// after navigation. Hold the entrance only for whatever is left of it, so a
+// slow hydration never adds a second, empty pause.
+const INTRO_FADE_START = 1.05;
+
+function getIntroDelay() {
+  if (typeof document === 'undefined') return 0;
+  if (document.documentElement.dataset.intro !== 'play') return 0;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 0;
+  return Math.max(0, INTRO_FADE_START - performance.now() / 1000);
+}
+
 export default function Hero({ site, photo, cvHref }) {
+  const [base] = useState(getIntroDelay);
+  const spotlightRef = useRef(null);
+  const frame = useRef(0);
+
+  const rise = (delay) => ({
+    initial: { opacity: 0, y: 18 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.9, ease, delay: base + delay },
+  });
+
+  // Soft light that follows the cursor across the hero background.
+  const onPointerMove = (event) => {
+    if (event.pointerType !== 'mouse' || frame.current) return;
+    const { clientX, clientY, currentTarget } = event;
+    frame.current = requestAnimationFrame(() => {
+      frame.current = 0;
+      const rect = currentTarget.getBoundingClientRect();
+      spotlightRef.current?.style.setProperty('--sx', `${clientX - rect.left}px`);
+      spotlightRef.current?.style.setProperty('--sy', `${clientY - rect.top}px`);
+    });
+  };
+
   return (
-    <section id="home" className={styles.hero} aria-labelledby="hero-title">
+    <section id="home" className={styles.hero} aria-labelledby="hero-title" onPointerMove={onPointerMove}>
+      <div ref={spotlightRef} className={styles.spotlight} aria-hidden="true" />
+
       <div className={`container ${styles.grid}`}>
         <div className={styles.content}>
           {site.availability && (
@@ -53,7 +85,7 @@ export default function Hero({ site, photo, cvHref }) {
                   className={`${styles.lineInner} ${line.accent ? styles.accentLine : ''}`}
                   initial={{ y: '105%' }}
                   animate={{ y: '0%' }}
-                  transition={{ duration: 1.1, ease, delay: 0.2 + index * 0.12 }}
+                  transition={{ duration: 1.1, ease, delay: base + 0.2 + index * 0.12 }}
                 >
                   {line.text}
                 </motion.span>
@@ -75,21 +107,25 @@ export default function Hero({ site, photo, cvHref }) {
           </motion.p>
 
           <motion.div className={styles.ctas} {...rise(0.7)}>
-            <Link href="/#projects" className="btn btn-primary">
-              Explore My Work
-              <ArrowRight size={18} data-arrow aria-hidden="true" />
-            </Link>
-            {cvHref ? (
-              <a href={cvHref} download className="btn btn-glass">
-                <ArrowDownToLine size={18} aria-hidden="true" />
-                Download CV
-              </a>
-            ) : (
-              <Link href="/#contact" className="btn btn-glass">
-                <MessageSquareText size={18} aria-hidden="true" />
-                Request CV
+            <Magnetic>
+              <Link href="/#projects" className="btn btn-primary">
+                Explore My Work
+                <ArrowRight size={18} data-arrow aria-hidden="true" />
               </Link>
-            )}
+            </Magnetic>
+            <Magnetic>
+              {cvHref ? (
+                <a href={cvHref} download className="btn btn-glass">
+                  <ArrowDownToLine size={18} aria-hidden="true" />
+                  Download CV
+                </a>
+              ) : (
+                <Link href="/#contact" className="btn btn-glass">
+                  <MessageSquareText size={18} aria-hidden="true" />
+                  Request CV
+                </Link>
+              )}
+            </Magnetic>
           </motion.div>
 
           <motion.div className={styles.meta} {...rise(0.8)}>
@@ -117,7 +153,7 @@ export default function Hero({ site, photo, cvHref }) {
           className={styles.visualWrap}
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease, delay: 0.25 }}
+          transition={{ duration: 1.2, ease, delay: base + 0.25 }}
         >
           <HeroVisual photo={photo} name={site.name} initials={site.initials} location={site.location} />
         </motion.div>

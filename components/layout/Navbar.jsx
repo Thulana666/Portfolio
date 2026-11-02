@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowDownToLine, Menu, MessageSquareText, X } from 'lucide-react';
+import Magnetic from '@/components/ui/Magnetic';
 import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
@@ -36,6 +37,8 @@ export default function Navbar({ brand, links, cvHref }) {
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef(null);
   const sheetRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 160, damping: 26, mass: 0.3 });
 
   // Scroll state + active section tracking.
   useEffect(() => {
@@ -127,7 +130,9 @@ export default function Navbar({ brand, links, cvHref }) {
 
         <div className={styles.actions}>
           <ThemeToggle />
-          <CvAction cvHref={cvHref} className={styles.cvDesktop} />
+          <Magnetic strength={0.25}>
+            <CvAction cvHref={cvHref} className={styles.cvDesktop} />
+          </Magnetic>
           <button
             ref={menuButtonRef}
             type="button"
@@ -140,6 +145,7 @@ export default function Navbar({ brand, links, cvHref }) {
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+        <motion.span className={styles.progress} style={{ scaleX: progress }} aria-hidden="true" />
       </nav>
 
       <AnimatePresence>

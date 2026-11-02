@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Building2, Check, ShieldCheck } from 'lucide-react';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeader from '@/components/ui/SectionHeader';
+import ScrollLine from '@/components/ui/ScrollLine';
 import ProjectVisual from '@/components/projects/ProjectVisual';
 import styles from './Experience.module.css';
 
@@ -19,10 +20,17 @@ export default function Experience({ items }) {
           id="experience-title"
         />
 
-        {items.map((job) => (
+        {items.map((job) => {
+          const years = [...new Set(job.period.match(/\d{4}/g) ?? [])];
+          return (
           <div key={job.company} className={styles.job}>
             <Reveal className={styles.aside}>
               <div className={styles.companyCard}>
+                {years.length > 0 && (
+                  <p className={`numeral ${styles.years}`} aria-hidden="true">
+                    {years.join('—')}
+                  </p>
+                )}
                 {job.logo ? (
                   <span className={styles.logoPlate}>
                     <Image
@@ -68,6 +76,8 @@ export default function Experience({ items }) {
               </div>
             </Reveal>
 
+            <div className={styles.timelineWrap}>
+            <ScrollLine className={styles.timelineFill} />
             <ol className={styles.timeline}>
               {job.contributions.map((item, index) => (
                 <Reveal
@@ -80,8 +90,9 @@ export default function Experience({ items }) {
                   <span className={styles.marker} aria-hidden="true">
                     {item.id}
                   </span>
-                  <article className={`glass ${styles.card}`} data-glow>
+                  <article className={`glass ${item.featured ? 'glass-thick' : ''} ${styles.card}`} data-glow>
                     <div className={styles.cardBody}>
+                      {item.featured && <span className={`label ${styles.focusLabel}`}>Primary focus · Data &amp; BI</span>}
                       <p className={styles.category}>{item.category}</p>
                       <h4 className={styles.title}>{item.title}</h4>
                       <p className={styles.description}>{item.description}</p>
@@ -117,8 +128,10 @@ export default function Experience({ items }) {
                 </Reveal>
               ))}
             </ol>
+            </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

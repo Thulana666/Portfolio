@@ -7,7 +7,37 @@
   padding: calc(var(--nav-offset) + clamp(16px, 4vh, 48px)) 0 clamp(96px, 12vh, 128px);
 }
 
+/* Cursor-following ambient light (desktop only) */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    560px circle at var(--sx, 70%) var(--sy, 40%),
+    rgba(139, 156, 255, 0.09),
+    rgba(167, 139, 250, 0.04) 35%,
+    transparent 65%
+  );
+}
+
+:global([data-theme='light']) .spotlight {
+  background: radial-gradient(
+    560px circle at var(--sx, 70%) var(--sy, 40%),
+    rgba(70, 85, 212, 0.08),
+    transparent 60%
+  );
+}
+
+@media (hover: none) {
+  .spotlight {
+    display: none;
+  }
+}
+
 .grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   align-items: center;

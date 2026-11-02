@@ -1,46 +1,116 @@
-.layout {
+/* Closing header */
+
+.header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: start;
+  margin-bottom: clamp(40px, 6vw, 72px);
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+.numeral {
+  justify-self: start;
+  margin: 0 0 -0.12em -0.04em;
+  font-size: clamp(5.5rem, 15vw, 12.5rem);
+  background: linear-gradient(180deg, var(--glass-strong), transparent 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
+  margin-bottom: 22px;
+  color: var(--accent-ink);
 }
 
-.index {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent-ink);
-  letter-spacing: 0.08em;
+.rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-strong), transparent);
 }
 
 .title {
-  font-size: clamp(2.4rem, 5.4vw, 4.5rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
+  max-width: 15ch;
+  font-size: clamp(2.9rem, 8.4vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.headerFoot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px 48px;
+  margin-top: clamp(28px, 4vw, 48px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
 }
 
 .lead {
-  max-width: 520px;
+  max-width: 460px;
   font-size: 1.0625rem;
   color: var(--text-2);
+}
+
+.emailWrap {
+  justify-self: end;
+}
+
+/* Oversized email link with a drawn underline on hover */
+.bigEmail {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.bigEmailText {
+  background: linear-gradient(90deg, var(--accent), var(--blue)) left bottom / 0% 2px no-repeat;
+  padding-bottom: 4px;
+  transition: background-size 0.6s var(--ease);
+}
+
+.bigEmail:hover .bigEmailText,
+.bigEmail:focus-visible .bigEmailText {
+  background-size: 100% 2px;
+}
+
+.bigEmailArrow {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  padding: 0.18em;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  transition: transform 0.4s var(--ease);
+}
+
+.bigEmail:hover .bigEmailArrow {
+  transform: rotate(45deg);
+}
+
+/* Channels + form */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.side {
+  display: grid;
+  gap: 18px;
 }
 
 .channels {
   list-style: none;
   display: grid;
   gap: 10px;
-  margin-top: 6px;
 }
 
 .channel {
@@ -104,31 +174,44 @@
   transform: translate(2px, -2px);
 }
 
-.footerRow {
-  display: flex;
-  flex-wrap: wrap;
+.infoCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 14px 22px;
-  margin-top: 6px;
+  gap: 12px 20px;
+  padding: 22px;
+  border-radius: var(--radius-lg);
 }
 
-.location {
+.infoKey {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.infoValue {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-2);
-  font-size: 0.9375rem;
+  font-weight: 500;
 }
 
-.location svg {
+.infoValue svg {
   color: var(--accent-ink);
+}
+
+.infoAction {
+  grid-column: 1 / -1;
+  margin-top: 6px;
 }
 
 .formCard {
   padding: clamp(22px, 3.4vw, 40px);
   border-radius: var(--radius-xl);
   /* Dense input area: keep it on a more opaque surface for readability */
-  background: var(--glass-solid);
+  background-color: var(--glass-solid);
 }
 
 .formHead {
@@ -147,17 +230,22 @@
   font-size: 0.9375rem;
 }
 
-.inlineLink {
-  color: var(--text);
-  border-bottom: 1px solid var(--accent-line);
-}
-
-.inlineLink:hover {
-  color: var(--accent-ink);
-}
-
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .headerFoot {
+    grid-template-columns: 1fr;
+  }
+
+  .emailWrap {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .bigEmail {
+    font-size: clamp(1.15rem, 6vw, 1.4rem);
   }
 }

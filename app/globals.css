@@ -26,6 +26,11 @@
   --glass-inner: rgba(255, 255, 255, 0.07);
   --glass-glow: rgba(255, 255, 255, 0.07);
   --glass-blur: 20px;
+  --glass-light: rgba(255, 255, 255, 0.07);
+  --glass-sheen: rgba(255, 255, 255, 0.035);
+  --glass-under: rgba(0, 0, 0, 0.35);
+  --refract-blue: rgba(139, 156, 255, 0.32);
+  --refract-lime: rgba(185, 243, 106, 0.24);
 
   /* Accents */
   --accent: #b9f36a;
@@ -100,6 +105,11 @@
   --glass-rim-soft: rgba(255, 255, 255, 0.3);
   --glass-inner: rgba(255, 255, 255, 0.85);
   --glass-glow: rgba(255, 255, 255, 0.55);
+  --glass-light: rgba(255, 255, 255, 0.7);
+  --glass-sheen: rgba(255, 255, 255, 0.4);
+  --glass-under: rgba(15, 23, 42, 0.05);
+  --refract-blue: rgba(70, 85, 212, 0.25);
+  --refract-lime: rgba(110, 170, 30, 0.25);
 
   --accent: #b9f36a;
   --accent-ink: #3d6a0a;
@@ -217,6 +227,11 @@ button {
   outline: 2px solid var(--accent-ink);
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+/* Sections receive programmatic focus after in-page navigation (HashScroll) */
+section[tabindex='-1']:focus {
+  outline: none;
 }
 
 .sr-only {
@@ -387,6 +402,205 @@ button {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+}
+
+/* Glass intensities — thin for chrome, `.glass` for regular panels,
+   thick for feature panels (stronger blur, top lighting, refracted rim). */
+.glass-thin {
+  --glass-blur: 12px;
+}
+
+.glass-thick {
+  --glass-blur: 30px;
+  background-image:
+    radial-gradient(130% 90% at 0% 0%, var(--glass-light), transparent 55%),
+    linear-gradient(180deg, var(--glass-sheen), transparent 38%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-inner),
+    inset 0 -1px 0 var(--glass-under),
+    var(--shadow-lg);
+}
+
+.glass-thick::before {
+  background: linear-gradient(
+    145deg,
+    var(--glass-rim) 0%,
+    var(--refract-blue) 20%,
+    transparent 42%,
+    transparent 62%,
+    var(--refract-lime) 86%,
+    var(--glass-rim-soft) 100%
+  );
+}
+
+/* Neo-brutalist accent: hard-edged mono label */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Oversized outline numerals for editorial indexing */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  user-select: none;
+}
+
+/* Full-bleed ticker band between sections */
+.ticker {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 48s linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 18px 14px;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--text-2);
+}
+
+.ticker-item::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin-left: 14px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Brand intro: rendered on the server, played once per session by CSS.
+   The head script marks repeat visits with data-intro="seen". */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  background: var(--bg);
+  pointer-events: none;
+  animation: intro-out 0.7s var(--ease) 1.15s forwards;
+}
+
+.intro-word {
+  display: flex;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: pre;
+}
+
+.intro-word span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: intro-letter 0.8s var(--ease) forwards;
+  animation-delay: calc(var(--i) * 28ms + 80ms);
+}
+
+.intro-word .intro-accent {
+  color: var(--accent-ink);
+}
+
+.intro-bar {
+  width: min(240px, 50vw);
+  height: 1px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.intro-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: intro-bar 1s var(--ease) 0.15s forwards;
+}
+
+.intro-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  opacity: 0;
+  animation: intro-fade 0.6s var(--ease) 0.5s forwards;
+}
+
+html[data-intro='seen'] .intro {
+  display: none;
+}
+
+@keyframes intro-letter {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-bar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -637,6 +851,14 @@ button {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .intro {
+    display: none;
+  }
+
+  .ticker-track {
+    animation: none;
   }
 
   *,
