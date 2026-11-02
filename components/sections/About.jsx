@@ -24,6 +24,7 @@ export default function About({ site, about, photo }) {
                   src={photo}
                   alt={`Portrait of ${site.name}`}
                   fill
+                  quality={90}
                   sizes="(max-width: 760px) 90vw, (max-width: 1080px) 40vw, 380px"
                   className={styles.photo}
                 />

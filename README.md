@@ -54,7 +54,7 @@ Everything visitors read lives in `data/`. You shouldn't need to touch component
 
 ### Profile photo
 
-Add a square photo (800×800 or larger) at `public/images/profile.jpg`. It appears in the hero and About section automatically. Until then a monogram is shown. To use another file name, change `site.photo`.
+The photo lives at `public/images/thulana-de-silva-portrait.jpg` (set by `site.photo`) and appears in the hero and About section. To replace it, add a 4:5 portrait (800×1000 or larger) under a **new** file name and point `site.photo` at it, so browsers and the image CDN don't keep serving cached copies of the old photo. If the file is missing, a monogram is shown.
 
 ### CV
 

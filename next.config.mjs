@@ -10,6 +10,8 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    // 90 is used for the portrait, where compression is most visible.
+    qualities: [75, 90],
   },
 };
 

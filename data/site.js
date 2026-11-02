@@ -30,8 +30,9 @@ export const site = {
   availability: 'Open to Data Analytics & AI opportunities',
 
   // Profile photo inside /public. Leave the file out (or set to null) and a
-  // monogram is shown instead. Recommended: square, at least 800x800px.
-  photo: '/images/profile.jpg',
+  // monogram is shown instead. Recommended: 4:5 portrait, at least 800x1000px.
+  // Use a new file name when replacing it so cached copies aren't reused.
+  photo: '/images/thulana-de-silva-portrait.jpg',
 
   // CV inside /public. If the file doesn't exist, CV buttons become
   // "Request CV" and link to the contact section instead.

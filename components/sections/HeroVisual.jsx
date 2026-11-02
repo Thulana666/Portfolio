@@ -235,6 +235,7 @@ export default function HeroVisual({ photo, name, initials, location }) {
               alt={`Portrait of ${name}`}
               fill
               preload
+              quality={90}
               sizes="(max-width: 980px) 60vw, 300px"
               className={styles.photo}
             />
