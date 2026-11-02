@@ -100,7 +100,7 @@ The form validates input in the browser and again on the server, and never shows
 
 1. Push this folder to its own GitHub repository.
 2. Import it at [vercel.com/new](https://vercel.com/new). The framework is detected automatically.
-3. Optionally set `NEXT_PUBLIC_SITE_URL` to your custom domain (for canonical URLs, Open Graph and the sitemap). Without it, Vercel's production URL is used.
+3. The live site is **https://thulanadesilva.vercel.app**, set as `site.url` in `data/site.js` and used for canonical URLs, Open Graph and the sitemap. If you add a custom domain, update `site.url` (or set `NEXT_PUBLIC_SITE_URL` on Vercel, which takes priority).
 4. Add the contact form variables above if you want server-side delivery.
 
 ## Design system notes

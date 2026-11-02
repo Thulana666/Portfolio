@@ -26,6 +26,10 @@ export const site = {
 
   location: 'Colombo, Sri Lanka',
 
+  // Public address used for SEO and link previews. Change this (or set
+  // NEXT_PUBLIC_SITE_URL on Vercel) if you add a custom domain.
+  url: 'https://thulanadesilva.vercel.app',
+
   // Short availability label shown in the hero. Set to '' to hide it.
   availability: 'Open to Data Analytics & AI opportunities',
 
