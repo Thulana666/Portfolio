@@ -11,12 +11,6 @@ import styles from './Hero.module.css';
 
 const ease = [0.22, 1, 0.36, 1];
 
-const titleLines = [
-  { text: 'Turning', accent: false },
-  { text: 'Data Into', accent: false },
-  { text: 'Intelligence.', accent: true },
-];
-
 const pillars = [
   { label: 'Data', tone: 'lime' },
   { label: 'AI', tone: 'violet' },
@@ -37,6 +31,12 @@ function getIntroDelay() {
 
 export default function Hero({ site, photo, cvHref }) {
   const [base] = useState(getIntroDelay);
+  // Name-first headline: "Thulana" / "De Silva." (surname in the gradient).
+  const [firstName, ...surname] = site.name.split(' ');
+  const titleLines = [
+    { text: firstName, accent: false },
+    { text: `${surname.join(' ')}.`, accent: true },
+  ];
   const spotlightRef = useRef(null);
   const frame = useRef(0);
 
@@ -72,13 +72,11 @@ export default function Hero({ site, photo, cvHref }) {
           )}
 
           <motion.p className={styles.kicker} {...rise(0.12)}>
-            <span className={styles.kickerName}>{site.name}</span>
             <span className={styles.kickerSep} aria-hidden="true" />
             {site.role}
           </motion.p>
 
           <h1 id="hero-title" className={styles.title}>
-            <span className="sr-only">{site.name} — </span>
             {titleLines.map((line, index) => (
               <span key={line.text} className={styles.line}>
                 <motion.span
@@ -92,6 +90,10 @@ export default function Hero({ site, photo, cvHref }) {
               </span>
             ))}
           </h1>
+
+          <motion.p className={styles.tagline} {...rise(0.4)}>
+            {site.headline}
+          </motion.p>
 
           <motion.p className={styles.pillars} {...rise(0.5)} aria-label={site.subheadline}>
             {pillars.map((pillar) => (

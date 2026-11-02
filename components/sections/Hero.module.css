@@ -113,10 +113,6 @@
   color: var(--text-2);
 }
 
-.kickerName {
-  color: var(--text);
-}
-
 .kickerSep {
   width: 22px;
   height: 1px;
@@ -125,13 +121,25 @@
 
 /* Title */
 
+/* Name-first headline: two short lines, so it can run larger than a tagline */
 .title {
   display: flex;
   flex-direction: column;
-  font-size: clamp(2.75rem, 6.6vw, 5.75rem);
+  font-size: clamp(4rem, 9vw, 7.25rem);
   font-weight: 600;
-  line-height: 0.94;
-  letter-spacing: -0.045em;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+/* Positioning statement directly under the name */
+.tagline {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.7vw, 2.3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text);
 }
 
 .line {
@@ -159,7 +167,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 22px;
-  margin-top: 28px;
+  margin-top: 20px;
   font-family: var(--font-display);
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   font-weight: 500;

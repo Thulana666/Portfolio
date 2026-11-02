@@ -251,8 +251,12 @@
 }
 
 @media (max-width: 760px) {
+  .head {
+    flex-wrap: wrap;
+  }
+
   .timeline {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding-top: 0;
     padding-left: 32px;
   }
