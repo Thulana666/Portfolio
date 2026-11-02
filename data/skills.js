@@ -66,6 +66,7 @@ export const skillGroups = [
       { name: 'SQL Server', note: 'Relational' },
       { name: 'MySQL', note: 'Relational' },
       { name: 'MongoDB', note: 'Document' },
+      { name: 'Supabase', note: 'Postgres platform' },
     ],
   },
   {
