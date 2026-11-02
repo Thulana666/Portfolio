@@ -1,21 +1,15 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowDownToLine, ArrowRight, MapPin, MessageSquareText } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '@/components/ui/BrandIcons';
 import Magnetic from '@/components/ui/Magnetic';
-import HeroVisual from './HeroVisual';
 import styles from './Hero.module.css';
 
 const ease = [0.22, 1, 0.36, 1];
-
-const pillars = [
-  { label: 'Data', tone: 'lime' },
-  { label: 'AI', tone: 'violet' },
-  { label: 'Innovation', tone: 'blue' },
-];
 
 // The brand intro is timed by CSS from first paint and starts fading ~1.05s
 // after navigation. Hold the entrance only for whatever is left of it, so a
@@ -29,86 +23,97 @@ function getIntroDelay() {
   return Math.max(0, INTRO_FADE_START - performance.now() / 1000);
 }
 
-export default function Hero({ site, photo, cvHref }) {
+/**
+ * Portrait-led hero: the cut-out portrait stands in front of the oversized
+ * name (split so the head sits between the words), with the role and calls
+ * to action on one side and the introduction on the other.
+ */
+export default function Hero({ site, portrait, cvHref }) {
   const [base] = useState(getIntroDelay);
-  // Name-first headline: "Thulana" / "De Silva." (surname in the gradient).
-  const [firstName, ...surname] = site.name.split(' ');
-  const titleLines = [
-    { text: firstName, accent: false },
-    { text: `${surname.join(' ')}.`, accent: true },
-  ];
-  const spotlightRef = useRef(null);
-  const frame = useRef(0);
 
-  const rise = (delay) => ({
-    initial: { opacity: 0, y: 18 },
+  const rise = (delay, y = 18) => ({
+    initial: { opacity: 0, y },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.9, ease, delay: base + delay },
   });
 
-  // Soft light that follows the cursor across the hero background.
-  const onPointerMove = (event) => {
-    if (event.pointerType !== 'mouse' || frame.current) return;
-    const { clientX, clientY, currentTarget } = event;
-    frame.current = requestAnimationFrame(() => {
-      frame.current = 0;
-      const rect = currentTarget.getBoundingClientRect();
-      spotlightRef.current?.style.setProperty('--sx', `${clientX - rect.left}px`);
-      spotlightRef.current?.style.setProperty('--sy', `${clientY - rect.top}px`);
-    });
-  };
+  const [firstName, ...rest] = site.name.split(' ');
+  const words = [firstName, rest.join(' ')];
+  const [roleLead, roleTail] = site.role.split(' & ');
 
   return (
-    <section id="home" className={styles.hero} aria-labelledby="hero-title" onPointerMove={onPointerMove}>
-      <div ref={spotlightRef} className={styles.spotlight} aria-hidden="true" />
+    <section
+      id="home"
+      className={styles.hero}
+      aria-labelledby="hero-title"
+      data-portrait={portrait ? '' : undefined}
+    >
+      <div className={styles.glow} aria-hidden="true" />
 
-      <div className={`container ${styles.grid}`}>
-        <div className={styles.content}>
-          {site.availability && (
-            <motion.p className={styles.availability} {...rise(0.05)}>
-              <span className={styles.liveDot} aria-hidden="true" />
-              {site.availability}
-            </motion.p>
-          )}
-
-          <motion.p className={styles.kicker} {...rise(0.12)}>
-            <span className={styles.kickerSep} aria-hidden="true" />
-            {site.role}
+      <div className={`container ${styles.top}`}>
+        <motion.p className={styles.kicker} {...rise(0.1)}>
+          <span className={styles.kickerLine} aria-hidden="true" />
+          {site.headline}
+        </motion.p>
+        {site.availability && (
+          <motion.p className={styles.availability} {...rise(0.15)}>
+            <span className={styles.liveDot} aria-hidden="true" />
+            {site.availability}
           </motion.p>
+        )}
+      </div>
 
-          <h1 id="hero-title" className={styles.title}>
-            {titleLines.map((line, index) => (
-              <span key={line.text} className={styles.line}>
-                <motion.span
-                  className={`${styles.lineInner} ${line.accent ? styles.accentLine : ''}`}
-                  initial={{ y: '105%' }}
-                  animate={{ y: '0%' }}
-                  transition={{ duration: 1.1, ease, delay: base + 0.2 + index * 0.12 }}
-                >
-                  {line.text}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
+      <div className={styles.stage}>
+        <h1 id="hero-title" className={styles.name}>
+          {words.map((word, index) => (
+            <motion.span
+              key={word}
+              className={styles.word}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, ease, delay: base + 0.2 + index * 0.12 }}
+            >
+              {word}
+              {index === words.length - 1 && <span className={styles.dot}>.</span>}
+            </motion.span>
+          ))}
+        </h1>
 
-          <motion.p className={styles.tagline} {...rise(0.4)}>
-            {site.headline}
-          </motion.p>
+        {portrait && (
+          <motion.div
+            className={styles.portrait}
+            initial={{ opacity: 0, y: 48 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease, delay: base + 0.3 }}
+          >
+            <Image
+              src={portrait.src}
+              alt={`Portrait of ${site.name}`}
+              width={portrait.width}
+              height={portrait.height}
+              preload
+              quality={90}
+              sizes="(max-width: 1099px) 70vw, 520px"
+              className={styles.portraitImg}
+            />
+          </motion.div>
+        )}
+      </div>
 
-          <motion.p className={styles.pillars} {...rise(0.5)} aria-label={site.subheadline}>
-            {pillars.map((pillar) => (
-              <span key={pillar.label} className={styles.pillar} data-tone={pillar.tone} aria-hidden="true">
-                <span className={styles.pillarDot} />
-                {pillar.label}.
-              </span>
-            ))}
-          </motion.p>
-
-          <motion.p className={styles.intro} {...rise(0.6)}>
-            {site.heroIntro}
-          </motion.p>
-
-          <motion.div className={styles.ctas} {...rise(0.7)}>
+      <div className={`container ${styles.bottom}`}>
+        <motion.div className={styles.identity} {...rise(0.55)}>
+          <p className={styles.role}>
+            <span className={styles.roleMark} aria-hidden="true" />
+            <span>
+              {roleLead}
+              {roleTail && (
+                <>
+                  <br />& {roleTail}.
+                </>
+              )}
+            </span>
+          </p>
+          <div className={styles.ctas}>
             <Magnetic>
               <Link href="/#projects" className="btn btn-primary">
                 Explore My Work
@@ -128,11 +133,14 @@ export default function Hero({ site, photo, cvHref }) {
                 </Link>
               )}
             </Magnetic>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.div className={styles.meta} {...rise(0.8)}>
+        <motion.div className={styles.about} {...rise(0.65)}>
+          <p className={styles.intro}>{site.heroIntro}</p>
+          <div className={styles.meta}>
             <span className={styles.location}>
-              <MapPin size={16} aria-hidden="true" />
+              <MapPin size={15} aria-hidden="true" />
               {site.location}
             </span>
             <span className={styles.metaDivider} aria-hidden="true" />
@@ -148,25 +156,9 @@ export default function Hero({ site, photo, cvHref }) {
                 </a>
               )}
             </span>
-          </motion.div>
-        </div>
-
-        <motion.div
-          className={styles.visualWrap}
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease, delay: base + 0.25 }}
-        >
-          <HeroVisual photo={photo} name={site.name} initials={site.initials} location={site.location} />
+          </div>
         </motion.div>
       </div>
-
-      <Link href="/#about" className={styles.scrollCue} aria-label="Scroll to About section">
-        <span className={styles.mouse} aria-hidden="true">
-          <span className={styles.wheel} />
-        </span>
-        <span className={styles.scrollLabel}>Scroll</span>
-      </Link>
     </section>
   );
 }

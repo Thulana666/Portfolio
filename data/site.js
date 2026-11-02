@@ -34,6 +34,10 @@ export const site = {
   // Use a new file name when replacing it so cached copies aren't reused.
   photo: '/images/thulana-de-silva-portrait.jpg',
 
+  // Cut-out portrait (transparent PNG) for the hero, standing in front of the
+  // name. If the file is missing the hero shows the name on its own.
+  heroPortrait: { src: '/images/thulana-de-silva-cutout.png', width: 1001, height: 1851 },
+
   // CV inside /public. If the file doesn't exist, CV buttons become
   // "Request CV" and link to the contact section instead.
   cv: '/cv/Thulana-De-Silva-CV.pdf',

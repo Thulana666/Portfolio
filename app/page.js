@@ -20,13 +20,14 @@ import { publicAsset } from '@/lib/assets';
 
 export default function HomePage() {
   const photo = publicAsset(site.photo);
+  const heroPortrait = publicAsset(site.heroPortrait?.src) ? site.heroPortrait : null;
   const cvHref = publicAsset(site.cv);
   const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL);
   const hasCertifications = certifications.some((c) => c?.name);
 
   return (
     <>
-      <Hero site={site} photo={photo} cvHref={cvHref} />
+      <Hero site={site} portrait={heroPortrait} cvHref={cvHref} />
       <Ticker items={['Data Analytics', 'Artificial Intelligence', 'Machine Learning', ...about.focus]} />
       <About site={site} about={about} photo={photo} />
       <Expertise items={expertise} />
