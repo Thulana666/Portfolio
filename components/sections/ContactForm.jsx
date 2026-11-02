@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { AlertCircle, CheckCircle2, Loader2, Mail, Send } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Loader2, Send } from 'lucide-react';
 import Magnetic from '@/components/ui/Magnetic';
 import { contactLimits, validateContact } from '@/lib/contact';
 import styles from './ContactForm.module.css';
@@ -10,15 +10,35 @@ import styles from './ContactForm.module.css';
 const initial = { name: '', email: '', subject: '', message: '' };
 const fieldOrder = ['name', 'email', 'subject', 'message'];
 
-export default function ContactForm({ formEnabled, email }) {
+/**
+ * Sends messages through /api/contact, which emails them to the site owner.
+ * Success is only shown when the server confirms delivery.
+ */
+export default function ContactForm({ email }) {
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [status, setStatus] = useState({ state: 'idle', message: '' });
   const formRef = useRef(null);
 
-  const canFallBack = Boolean(email);
+  // Links with data-contact-subject (e.g. "Request CV") pre-fill the subject
+  // and put the cursor in the message box, instead of opening an email app.
+  useEffect(() => {
+    const onClick = (event) => {
+      const link = event.target instanceof Element ? event.target.closest('[data-contact-subject]') : null;
+      if (!link) return;
+      const subject = link.getAttribute('data-contact-subject');
+      setValues((current) => (current.subject ? current : { ...current, subject }));
+      setTimeout(() => formRef.current?.querySelector('[name="message"]')?.focus({ preventScroll: true }), 500);
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   const loading = status.state === 'loading';
+  const failureMessage = email
+    ? `Sorry, your message couldn't be sent right now. Please try again in a moment, or email me at ${email}.`
+    : "Sorry, your message couldn't be sent right now. Please try again in a moment.";
 
   const update = (field) => (event) => {
     const next = { ...values, [field]: event.target.value };
@@ -32,15 +52,6 @@ export default function ContactForm({ formEnabled, email }) {
     setErrors(validateContact(values).errors);
   };
 
-  const openMailClient = (clean) => {
-    const body = `${clean.message}\n\n— ${clean.name} (${clean.email})`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(clean.subject)}&body=${encodeURIComponent(body)}`;
-    setStatus({
-      state: 'mailto',
-      message: `Your email app should open with the message ready to send. If nothing opened, you can write to ${email} directly.`,
-    });
-  };
-
   const onSubmit = async (event) => {
     event.preventDefault();
     const { errors: found, values: clean } = validateContact(values);
@@ -50,12 +61,6 @@ export default function ContactForm({ formEnabled, email }) {
     const firstInvalid = fieldOrder.find((f) => found[f]);
     if (firstInvalid) {
       formRef.current?.querySelector(`[name="${firstInvalid}"]`)?.focus();
-      return;
-    }
-
-    if (!formEnabled) {
-      if (canFallBack) openMailClient(clean);
-      else setStatus({ state: 'error', message: 'The contact form is not available right now.' });
       return;
     }
 
@@ -72,11 +77,10 @@ export default function ContactForm({ formEnabled, email }) {
       if (response.ok && data.ok) {
         setValues(initial);
         setTouched({});
-        setStatus({ state: 'success', message: `Thank you, ${clean.name.split(' ')[0]}. Your message has been sent — I'll reply to ${clean.email}.` });
-        return;
-      }
-      if (data.code === 'not_configured' && canFallBack) {
-        openMailClient(clean);
+        setStatus({
+          state: 'success',
+          message: `Thank you, ${clean.name.split(' ')[0]}. Your message has been sent and I'll reply to ${clean.email}.`,
+        });
         return;
       }
       if (data.code === 'invalid' && data.errors) {
@@ -84,14 +88,9 @@ export default function ContactForm({ formEnabled, email }) {
         setStatus({ state: 'error', message: 'Please check the highlighted fields.' });
         return;
       }
-      throw new Error(data.error || 'Request failed');
+      setStatus({ state: 'error', message: failureMessage });
     } catch {
-      setStatus({
-        state: 'error',
-        message: canFallBack
-          ? `Something went wrong and your message was not sent. Please try again, or email ${email} directly.`
-          : 'Something went wrong and your message was not sent. Please try again.',
-      });
+      setStatus({ state: 'error', message: failureMessage });
     }
   };
 
@@ -118,7 +117,14 @@ export default function ContactForm({ formEnabled, email }) {
     ) : null;
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onSubmit} noValidate aria-describedby="contact-form-note">
+    <form
+      ref={formRef}
+      id="contact-form"
+      className={styles.form}
+      onSubmit={onSubmit}
+      noValidate
+      aria-describedby="contact-form-note"
+    >
       <div className={styles.row}>
         <div className={styles.field}>
           <label htmlFor="contact-name">Name</label>
@@ -157,26 +163,20 @@ export default function ContactForm({ formEnabled, email }) {
 
       <div className={styles.actions}>
         <Magnetic strength={0.2} className={styles.submitWrap}>
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? (
-            <>
-              <Loader2 size={18} className={styles.spin} aria-hidden="true" /> Sending…
-            </>
-          ) : formEnabled ? (
-            <>
-              Send message <Send size={17} data-arrow="diag" aria-hidden="true" />
-            </>
-          ) : (
-            <>
-              Compose email <Mail size={17} aria-hidden="true" />
-            </>
-          )}
-        </button>
+          <button type="submit" className="btn btn-primary" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 size={18} className={styles.spin} aria-hidden="true" /> Sending…
+              </>
+            ) : (
+              <>
+                Send message <Send size={17} data-arrow="diag" aria-hidden="true" />
+              </>
+            )}
+          </button>
         </Magnetic>
         <p id="contact-form-note" className={styles.note}>
-          {formEnabled
-            ? 'Your details are only used to reply to you.'
-            : 'Opens your email app with this message filled in.'}
+          Your details are only used to reply to you.
         </p>
       </div>
 
@@ -193,10 +193,8 @@ export default function ContactForm({ formEnabled, email }) {
             >
               {status.state === 'success' ? (
                 <CheckCircle2 size={18} aria-hidden="true" />
-              ) : status.state === 'error' ? (
-                <AlertCircle size={18} aria-hidden="true" />
               ) : (
-                <Mail size={18} aria-hidden="true" />
+                <AlertCircle size={18} aria-hidden="true" />
               )}
               {status.message}
             </motion.p>

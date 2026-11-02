@@ -22,7 +22,12 @@ function CvAction({ cvHref, className = '', onClick }) {
     );
   }
   return (
-    <Link href="/#contact" className={`btn btn-primary btn-sm ${className}`} onClick={onClick}>
+    <Link
+      href="/#contact-form"
+      data-contact-subject="CV request"
+      className={`btn btn-primary btn-sm ${className}`}
+      onClick={onClick}
+    >
       <MessageSquareText size={16} aria-hidden="true" />
       Request CV
     </Link>

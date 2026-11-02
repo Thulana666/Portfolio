@@ -127,7 +127,7 @@ export default function Hero({ site, portrait, cvHref }) {
                   Download CV
                 </a>
               ) : (
-                <Link href="/#contact" className="btn btn-glass">
+                <Link href="/#contact-form" data-contact-subject="CV request" className="btn btn-glass">
                   <MessageSquareText size={18} aria-hidden="true" />
                   Request CV
                 </Link>

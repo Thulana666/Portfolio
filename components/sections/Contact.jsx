@@ -1,11 +1,11 @@
-import { ArrowDownToLine, ArrowUpRight, Mail, MapPin } from 'lucide-react';
+import { ArrowDownToLine, ArrowUpRight, MapPin, MessageSquareText } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '@/components/ui/BrandIcons';
 import Magnetic from '@/components/ui/Magnetic';
 import Reveal from '@/components/ui/Reveal';
 import ContactForm from './ContactForm';
 import styles from './Contact.module.css';
 
-export default function Contact({ site, cvHref, formEnabled, index }) {
+export default function Contact({ site, cvHref, index }) {
   const channels = [
     site.socials.linkedin && {
       label: 'LinkedIn',
@@ -90,11 +90,9 @@ export default function Contact({ site, cvHref, formEnabled, index }) {
                     <ArrowDownToLine size={18} aria-hidden="true" /> Download CV
                   </a>
                 ) : (
-                  site.email && (
-                    <a href={`mailto:${site.email}?subject=${encodeURIComponent('CV request')}`} className="btn btn-glass">
-                      <Mail size={18} aria-hidden="true" /> Request my CV
-                    </a>
-                  )
+                  <a href="#contact-form" data-contact-subject="CV request" className="btn btn-glass">
+                    <MessageSquareText size={18} aria-hidden="true" /> Request my CV
+                  </a>
                 )}
               </div>
             </div>
@@ -104,10 +102,10 @@ export default function Contact({ site, cvHref, formEnabled, index }) {
             <div className={styles.formHead}>
               <h3 className={styles.formTitle}>Send a message</h3>
               <p className={styles.formSub}>
-                {formEnabled ? 'I usually reply within a few days.' : 'Your message opens in your email app, ready to send.'}
+                It goes straight to my inbox. I usually reply within a few days.
               </p>
             </div>
-            <ContactForm formEnabled={formEnabled} email={site.email} />
+            <ContactForm email={site.email} />
           </Reveal>
         </div>
       </div>

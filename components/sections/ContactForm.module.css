@@ -183,15 +183,6 @@
   color: #ff8f8f;
 }
 
-.status[data-state='mailto'] {
-  background: var(--blue-soft);
-  border: 1px solid var(--line-strong);
-}
-
-.status[data-state='mailto'] svg {
-  color: var(--blue);
-}
-
 @media (max-width: 600px) {
   .row {
     grid-template-columns: 1fr;

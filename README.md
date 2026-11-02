@@ -83,18 +83,24 @@ The certifications section is hidden until `data/certifications.js` has at least
 
 ## Contact form
 
-The form validates input in the browser and again on the server, and never shows a fake success message.
+Messages are sent from the website straight to your inbox through `/api/contact` using [Resend](https://resend.com). The visitor is set as reply-to, so you can answer with a normal reply. Input is validated in the browser and on the server, a hidden honeypot field filters out simple bots, and success is only shown when Resend confirms delivery.
 
-- **Without configuration** (default): submitting opens the visitor's email app with the message pre-filled and addressed to `site.email`.
-- **With [Resend](https://resend.com)**: set these environment variables (locally in `.env.local`, or in Vercel → Project → Settings → Environment Variables):
+Setup (one time):
 
-  ```
-  RESEND_API_KEY=re_...
-  CONTACT_TO_EMAIL=you@example.com
-  CONTACT_FROM_EMAIL=Portfolio <hello@your-verified-domain.com>   # optional
-  ```
+1. Sign up at resend.com **with the email address that should receive the messages** (with Resend's shared sender, it can only deliver to the account owner's address).
+2. Create an API key (Resend → API Keys → Create, "Sending access").
+3. In Vercel → Project → Settings → Environment Variables, add:
 
-  Messages are then sent through `/api/contact`, with real loading, success and error states. Rebuild or redeploy after changing these variables.
+   ```
+   RESEND_API_KEY=re_...
+   CONTACT_TO_EMAIL=you@example.com
+   ```
+
+4. Redeploy (Deployments → ⋯ → Redeploy). Environment variables only apply to new deployments.
+
+For local testing, put the same values in `.env.local`. To send from your own address (e.g. `hello@yourdomain.com`), verify a domain in Resend and set `CONTACT_FROM_EMAIL`.
+
+Until the variables are set, the form shows a polite error with your email address instead of sending. "Request CV" buttons jump to the form with the subject pre-filled.
 
 ## Deploying to Vercel
 

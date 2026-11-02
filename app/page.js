@@ -22,7 +22,6 @@ export default function HomePage() {
   const photo = publicAsset(site.photo);
   const heroPortrait = publicAsset(site.heroPortrait?.src) ? site.heroPortrait : null;
   const cvHref = publicAsset(site.cv);
-  const formEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL);
   const hasCertifications = certifications.some((c) => c?.name);
 
   return (
@@ -61,7 +60,7 @@ export default function HomePage() {
 
       <Education items={education} />
       <Certifications items={certifications} />
-      <Contact site={site} cvHref={cvHref} formEnabled={formEnabled} index={hasCertifications ? '08' : '07'} />
+      <Contact site={site} cvHref={cvHref} index={hasCertifications ? '08' : '07'} />
     </>
   );
 }
