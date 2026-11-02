@@ -102,6 +102,11 @@ export const about = {
   ],
   personalInterests: [
     {
+      label: 'Bodybuilding',
+      detail:
+        'Training since 2020: at home until 2023, in the gym since. A personal passion built on discipline, consistency and steady progress.',
+    },
+    {
       label: 'Community service',
       detail: 'Committee Member, Club Service Avenue, Rotaract Club of Colombo Port City (2025 – Present)',
     },
