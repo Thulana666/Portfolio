@@ -124,28 +124,35 @@
   bottom: 0;
   z-index: 1;
   height: var(--stage-h);
+  container-type: inline-size;
 }
 
+/* The words hug the head: the gap is just wider than the head
+   (~23% of the stage height) and sits exactly at the page centre (three-
+   column grid), and the font grows to fill the remaining width
+   (cqi = stage width). 7.3em ≈ the width of both words. */
 .name {
+  --name-gap: calc(var(--stage-h) * 0.23);
+  --name-w: min(100cqi - 2 * var(--gutter), 1480px);
   position: absolute;
   top: 20%;
-  left: max(var(--gutter), calc((100% - var(--container)) / 2));
-  right: max(var(--gutter), calc((100% - var(--container)) / 2));
+  left: 0;
+  right: 0;
   z-index: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr var(--name-gap) 1fr;
   align-items: baseline;
-  justify-content: space-between;
   margin: 0;
   translate: 0 -50%;
-  font-size: min(calc(var(--stage-h) * 0.17), 8.6vw, 8.25rem);
-  font-weight: 600;
+  font-size: min(calc((var(--name-w) - var(--name-gap)) / 7.3), calc(var(--stage-h) * 0.21));
+  font-weight: 700;
   line-height: 0.9;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.055em;
   white-space: nowrap;
   color: var(--text);
   text-shadow:
-    0 0 36px rgba(255, 255, 255, 0.16),
-    0 0 90px rgba(139, 156, 255, 0.2);
+    0 0 40px rgba(255, 255, 255, 0.2),
+    0 0 110px rgba(139, 156, 255, 0.24);
 }
 
 :global([data-theme='light']) .name {
@@ -154,6 +161,16 @@
 
 .word {
   display: block;
+}
+
+.word:first-child {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.word:last-child {
+  grid-column: 3;
+  justify-self: start;
 }
 
 .dot {
@@ -200,10 +217,11 @@
   gap: 24px;
 }
 
+/* Side columns stop short of the portrait (half its width ≈ 27% of --stage-h) */
 .identity {
   display: grid;
   gap: 26px;
-  max-width: 340px;
+  max-width: min(340px, calc(50% - var(--stage-h) * 0.29));
 }
 
 .role {
@@ -236,7 +254,7 @@
 .about {
   display: grid;
   gap: 18px;
-  max-width: 380px;
+  max-width: min(380px, calc(50% - var(--stage-h) * 0.29));
 }
 
 .intro {
@@ -290,8 +308,7 @@
 
 /* Without a portrait, the name simply sits centred on the stage */
 .hero:not([data-portrait]) .name {
-  justify-content: center;
-  gap: 0.3em;
+  --name-gap: 0.3em;
 }
 
 /* --------------------------------------------------------------------------
@@ -328,11 +345,13 @@
     left: auto;
     right: auto;
     translate: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0;
     padding-inline: var(--gutter);
-    font-size: clamp(3.4rem, 15vw, 7rem);
-    line-height: 0.88;
+    font-size: clamp(3.8rem, 21vw, 8rem);
+    line-height: 0.86;
     text-align: center;
   }
 
